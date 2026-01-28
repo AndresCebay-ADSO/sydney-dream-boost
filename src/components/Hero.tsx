@@ -1,5 +1,6 @@
 import { ArrowDown, MapPin, Calendar, Target } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import heroImage from "@/assets/hero.jpg";
 
 interface HeroProps {
   onOrderClick: () => void;
@@ -8,15 +9,15 @@ interface HeroProps {
 
 export const Hero = ({ onOrderClick, availableShirts }: HeroProps) => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-hero">
-      {/* Background gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background" />
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Background hero image */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${heroImage})` }}
+      />
       
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent/5 rounded-full blur-3xl animate-pulse delay-1000" />
-      </div>
+      {/* Dark overlay for text readability */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/60 to-background" />
 
       <div className="container relative z-10 px-4 py-20">
         <div className="max-w-4xl mx-auto text-center space-y-8">
