@@ -1,6 +1,12 @@
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
 
 interface HeaderProps {
   onOrderClick: () => void;
@@ -63,43 +69,52 @@ export const Header = ({ onOrderClick }: HeaderProps) => {
 
           {/* Mobile Menu Button */}
           <button 
-            className="md:hidden p-2"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle menu"
+            className="md:hidden p-2 hover:bg-secondary/50 rounded-lg transition-colors"
+            onClick={() => setIsMobileMenuOpen(true)}
+            aria-label="Abrir menú"
           >
-            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            <Menu className="w-6 h-6" />
           </button>
         </div>
+      </div>
 
-        {/* Mobile Navigation */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-border animate-fade-in">
-            <nav className="flex flex-col gap-4">
-              <button 
-                onClick={() => scrollToSection("historia")}
-                className="text-left py-2 font-medium text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Historia
-              </button>
-              <button 
-                onClick={() => scrollToSection("producto")}
-                className="text-left py-2 font-medium text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Producto
-              </button>
+      {/* Mobile Navigation Sheet */}
+      <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+        <SheetContent side="right" className="w-[280px] bg-background border-border">
+          <SheetHeader className="text-left mb-8">
+            <SheetTitle className="text-gradient-gold font-display text-xl">
+              Team Tincho
+            </SheetTitle>
+          </SheetHeader>
+          
+          <nav className="flex flex-col gap-2">
+            <button 
+              onClick={() => scrollToSection("historia")}
+              className="text-left py-3 px-4 rounded-lg font-medium text-foreground hover:bg-secondary transition-colors"
+            >
+              Historia
+            </button>
+            <button 
+              onClick={() => scrollToSection("producto")}
+              className="text-left py-3 px-4 rounded-lg font-medium text-foreground hover:bg-secondary transition-colors"
+            >
+              Producto
+            </button>
+            
+            <div className="pt-4 mt-4 border-t border-border">
               <Button 
                 onClick={() => {
                   onOrderClick();
                   setIsMobileMenuOpen(false);
                 }}
-                className="bg-primary text-primary-foreground hover:bg-gold-light font-display font-semibold shadow-gold"
+                className="w-full bg-primary text-primary-foreground hover:bg-gold-light font-display font-semibold shadow-gold"
               >
                 Reservar ahora
               </Button>
-            </nav>
-          </div>
-        )}
-      </div>
+            </div>
+          </nav>
+        </SheetContent>
+      </Sheet>
     </header>
   );
 };
