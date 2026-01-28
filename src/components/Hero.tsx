@@ -31,8 +31,8 @@ export const Hero = ({ onOrderClick, availableShirts }: HeroProps) => {
 
           {/* Main heading */}
           <h1 className="font-display text-4xl sm:text-5xl md:text-7xl font-bold leading-tight animate-fade-in" style={{ animationDelay: "0.1s" }}>
-            Apoya el sueño de
-            <span className="block text-gradient-gold mt-2">Martín Perdomo</span>
+            De La Plata a Sídney 2026
+            <span className="block text-gradient-gold mt-2">Corre con Martín Perdomo</span>
           </h1>
 
           {/* Subtitle */}
