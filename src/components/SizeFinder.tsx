@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { X, Ruler, Check } from "lucide-react";
+import { Ruler, Check, Shirt } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -14,62 +14,78 @@ import { Slider } from "@/components/ui/slider";
 interface SizeFinderProps {
   open: boolean;
   onClose: () => void;
-  onSizeSelect: (size: string) => void;
 }
 
-type FitPreference = "ajustada" | "normal" | "holgada";
+type FitResult = "ajustada" | "perfecta" | "holgada";
 
-export const SizeFinder = ({ open, onClose, onSizeSelect }: SizeFinderProps) => {
+interface FitInfo {
+  result: FitResult;
+  title: string;
+  description: string;
+  icon: string;
+}
+
+export const SizeFinder = ({ open, onClose }: SizeFinderProps) => {
   const [step, setStep] = useState(1);
   const [sex, setSex] = useState<"M" | "F" | "">("");
   const [height, setHeight] = useState([170]);
   const [weight, setWeight] = useState([70]);
-  const [fit, setFit] = useState<FitPreference>("normal");
-  const [recommendedSize, setRecommendedSize] = useState<string | null>(null);
+  const [fitResult, setFitResult] = useState<FitInfo | null>(null);
 
-  const calculateSize = () => {
+  const calculateFit = () => {
     const h = height[0];
     const w = weight[0];
     const bmi = w / ((h / 100) ** 2);
     
-    let baseSize: string;
+    let result: FitResult;
     
-    // Base size calculation
-    if (bmi < 18.5) {
-      baseSize = h < 165 ? "XS" : h < 175 ? "S" : "M";
-    } else if (bmi < 25) {
-      baseSize = h < 160 ? "S" : h < 170 ? "M" : h < 180 ? "L" : "XL";
-    } else if (bmi < 30) {
-      baseSize = h < 165 ? "M" : h < 175 ? "L" : "XL";
+    // La talla única equivale aproximadamente a una M-L
+    // Calculamos cómo le quedaría basándonos en sus medidas
+    if (sex === "F") {
+      // Mujeres: la talla única les quedará más holgada en general
+      if (bmi < 20 && h < 165) {
+        result = "holgada";
+      } else if (bmi < 25 && h < 175) {
+        result = "perfecta";
+      } else {
+        result = "ajustada";
+      }
     } else {
-      baseSize = h < 170 ? "L" : h < 180 ? "XL" : "XXL";
+      // Hombres
+      if (bmi < 20 && h < 170) {
+        result = "holgada";
+      } else if (bmi >= 20 && bmi < 26 && h >= 165 && h <= 185) {
+        result = "perfecta";
+      } else if (bmi >= 26 || h > 185) {
+        result = "ajustada";
+      } else {
+        result = "perfecta";
+      }
     }
 
-    // Adjust for fit preference
-    const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
-    const currentIndex = sizes.indexOf(baseSize);
-    
-    if (fit === "ajustada" && currentIndex > 0) {
-      baseSize = sizes[currentIndex - 1];
-    } else if (fit === "holgada" && currentIndex < sizes.length - 1) {
-      baseSize = sizes[currentIndex + 1];
-    }
+    const fitInfoMap: Record<FitResult, FitInfo> = {
+      ajustada: {
+        result: "ajustada",
+        title: "Te quedará ajustada",
+        description: "La camiseta se adaptará bien a tu cuerpo, con un estilo más deportivo y ceñido. Ideal si prefieres un look atlético.",
+        icon: "💪"
+      },
+      perfecta: {
+        result: "perfecta",
+        title: "¡Te quedará perfecta!",
+        description: "La talla única se adapta muy bien a tu complexión. Tendrás un ajuste cómodo y versátil para cualquier ocasión.",
+        icon: "✨"
+      },
+      holgada: {
+        result: "holgada",
+        title: "Te quedará holgada",
+        description: "Tendrás un estilo más relajado y casual. Perfecta para mayor libertad de movimiento y comodidad.",
+        icon: "😎"
+      }
+    };
 
-    // Gender adjustment
-    if (sex === "F" && currentIndex > 0) {
-      baseSize = sizes[Math.max(0, sizes.indexOf(baseSize) - 1)];
-    }
-
-    setRecommendedSize(baseSize);
-    setStep(4);
-  };
-
-  const handleUseSize = () => {
-    if (recommendedSize) {
-      onSizeSelect(recommendedSize);
-      handleReset();
-      onClose();
-    }
+    setFitResult(fitInfoMap[result]);
+    setStep(3);
   };
 
   const handleReset = () => {
@@ -77,8 +93,7 @@ export const SizeFinder = ({ open, onClose, onSizeSelect }: SizeFinderProps) => 
     setSex("");
     setHeight([170]);
     setWeight([70]);
-    setFit("normal");
-    setRecommendedSize(null);
+    setFitResult(null);
   };
 
   const handleClose = () => {
@@ -91,15 +106,15 @@ export const SizeFinder = ({ open, onClose, onSizeSelect }: SizeFinderProps) => 
       <DialogContent className="sm:max-w-md bg-card border-border">
         <DialogHeader>
           <DialogTitle className="font-display text-xl flex items-center gap-2">
-            <Ruler className="w-5 h-5 text-primary" />
-            Encontrar mi talla
+            <Shirt className="w-5 h-5 text-primary" />
+            ¿Es para mí?
           </DialogTitle>
         </DialogHeader>
 
         <div className="py-4">
           {/* Progress indicator */}
           <div className="flex gap-2 mb-8">
-            {[1, 2, 3, 4].map((s) => (
+            {[1, 2, 3].map((s) => (
               <div
                 key={s}
                 className={`h-1 flex-1 rounded-full transition-colors ${
@@ -145,42 +160,31 @@ export const SizeFinder = ({ open, onClose, onSizeSelect }: SizeFinderProps) => 
             </div>
           )}
 
-          {/* Step 2: Height */}
+          {/* Step 2: Height & Weight */}
           {step === 2 && (
             <div className="space-y-6">
-              <p className="text-muted-foreground">¿Cuál es tu altura?</p>
-              <div className="space-y-4">
-                <div className="text-center">
-                  <span className="font-display text-4xl font-bold text-gradient-gold">{height[0]}</span>
-                  <span className="text-muted-foreground ml-2">cm</span>
-                </div>
-                <Slider
-                  value={height}
-                  onValueChange={setHeight}
-                  min={140}
-                  max={210}
-                  step={1}
-                  className="[&_[role=slider]]:bg-primary"
-                />
-                <div className="flex justify-between text-sm text-muted-foreground">
-                  <span>140 cm</span>
-                  <span>210 cm</span>
+              <div>
+                <p className="text-muted-foreground mb-4">¿Cuál es tu altura?</p>
+                <div className="space-y-4">
+                  <div className="text-center">
+                    <span className="font-display text-4xl font-bold text-gradient-gold">{height[0]}</span>
+                    <span className="text-muted-foreground ml-2">cm</span>
+                  </div>
+                  <Slider
+                    value={height}
+                    onValueChange={setHeight}
+                    min={140}
+                    max={210}
+                    step={1}
+                    className="[&_[role=slider]]:bg-primary"
+                  />
+                  <div className="flex justify-between text-sm text-muted-foreground">
+                    <span>140 cm</span>
+                    <span>210 cm</span>
+                  </div>
                 </div>
               </div>
-              <div className="flex gap-3">
-                <Button variant="outline" onClick={() => setStep(1)} className="flex-1">
-                  Atrás
-                </Button>
-                <Button onClick={() => setStep(3)} className="flex-1 bg-primary text-primary-foreground hover:bg-gold-light">
-                  Continuar
-                </Button>
-              </div>
-            </div>
-          )}
 
-          {/* Step 3: Weight & Fit */}
-          {step === 3 && (
-            <div className="space-y-6">
               <div>
                 <p className="text-muted-foreground mb-4">¿Cuál es tu peso?</p>
                 <div className="space-y-4">
@@ -203,60 +207,44 @@ export const SizeFinder = ({ open, onClose, onSizeSelect }: SizeFinderProps) => 
                 </div>
               </div>
 
-              <div>
-                <p className="text-muted-foreground mb-4">¿Cómo prefieres el ajuste?</p>
-                <RadioGroup value={fit} onValueChange={(v) => setFit(v as FitPreference)}>
-                  <div className="grid grid-cols-3 gap-2">
-                    {[
-                      { value: "ajustada", label: "Ajustada" },
-                      { value: "normal", label: "Normal" },
-                      { value: "holgada", label: "Holgada" },
-                    ].map((option) => (
-                      <Label
-                        key={option.value}
-                        htmlFor={option.value}
-                        className={`flex items-center justify-center p-4 rounded-lg border cursor-pointer transition-all text-sm ${
-                          fit === option.value ? "border-primary bg-primary/10" : "border-border hover:border-primary/50"
-                        }`}
-                      >
-                        <RadioGroupItem value={option.value} id={option.value} className="sr-only" />
-                        <span className="font-medium">{option.label}</span>
-                      </Label>
-                    ))}
-                  </div>
-                </RadioGroup>
-              </div>
-
               <div className="flex gap-3">
-                <Button variant="outline" onClick={() => setStep(2)} className="flex-1">
+                <Button variant="outline" onClick={() => setStep(1)} className="flex-1">
                   Atrás
                 </Button>
-                <Button onClick={calculateSize} className="flex-1 bg-primary text-primary-foreground hover:bg-gold-light">
-                  Ver mi talla
+                <Button onClick={calculateFit} className="flex-1 bg-primary text-primary-foreground hover:bg-gold-light">
+                  Ver cómo me queda
                 </Button>
               </div>
             </div>
           )}
 
-          {/* Step 4: Result */}
-          {step === 4 && recommendedSize && (
+          {/* Step 3: Result */}
+          {step === 3 && fitResult && (
             <div className="text-center space-y-6">
               <div className="w-24 h-24 mx-auto rounded-full bg-primary/20 flex items-center justify-center">
-                <Check className="w-12 h-12 text-primary" />
+                <span className="text-5xl">{fitResult.icon}</span>
               </div>
               <div>
-                <p className="text-muted-foreground mb-2">Tu talla recomendada es</p>
-                <span className="font-display text-6xl font-bold text-gradient-gold">{recommendedSize}</span>
+                <span className="font-display text-2xl font-bold text-gradient-gold">{fitResult.title}</span>
               </div>
-              <p className="text-sm text-muted-foreground">
-                Basado en tus medidas y preferencia de ajuste {fit}.
+              <p className="text-muted-foreground">
+                {fitResult.description}
               </p>
+              <div className="p-4 rounded-lg bg-primary/10 border border-primary/30">
+                <div className="flex items-center justify-center gap-2 mb-2">
+                  <Check className="w-5 h-5 text-primary" />
+                  <span className="font-medium text-foreground">Talla única</span>
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  Diseño versátil que se adapta a diferentes cuerpos
+                </p>
+              </div>
               <div className="flex gap-3">
                 <Button variant="outline" onClick={handleReset} className="flex-1">
                   Calcular de nuevo
                 </Button>
-                <Button onClick={handleUseSize} className="flex-1 bg-primary text-primary-foreground hover:bg-gold-light">
-                  Usar talla {recommendedSize}
+                <Button onClick={handleClose} className="flex-1 bg-primary text-primary-foreground hover:bg-gold-light">
+                  ¡Entendido!
                 </Button>
               </div>
             </div>

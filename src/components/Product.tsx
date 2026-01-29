@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Check, Package, Truck } from "lucide-react";
+import { Check, Package, Truck, HelpCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { SizeFinder } from "@/components/SizeFinder";
 import camisetaImage from "@/assets/camiseta-berlin.png";
 
 interface ProductProps {
@@ -19,6 +20,7 @@ export const Product = ({
   availableShirts 
 }: ProductProps) => {
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [isSizeFinderOpen, setIsSizeFinderOpen] = useState(false);
 
   return (
     <section id="producto" className="py-24 bg-charcoal relative overflow-hidden">
@@ -99,17 +101,34 @@ export const Product = ({
               </div>
 
               {/* CTA */}
-              <Button 
-                size="lg" 
-                onClick={onOrderClick}
-                className="w-full bg-primary text-primary-foreground hover:bg-gold-light font-display font-semibold text-lg py-6 shadow-gold hover:shadow-glow transition-all duration-300"
-              >
-                Reservar ahora
-              </Button>
+              <div className="flex gap-3">
+                <Button 
+                  size="lg" 
+                  onClick={onOrderClick}
+                  className="flex-1 bg-primary text-primary-foreground hover:bg-gold-light font-display font-semibold text-lg py-6 shadow-gold hover:shadow-glow transition-all duration-300"
+                >
+                  Reservar ahora
+                </Button>
+                <Button 
+                  size="lg" 
+                  variant="outline"
+                  onClick={() => setIsSizeFinderOpen(true)}
+                  className="border-border hover:border-primary/50 font-display font-medium text-lg py-6 transition-all duration-300"
+                >
+                  <HelpCircle className="w-5 h-5 mr-2" />
+                  ¿Es para mí?
+                </Button>
+              </div>
 
               <p className="text-center text-sm text-muted-foreground">
                 🔒 Tu información está segura. Pago al momento de la entrega.
               </p>
+
+              {/* Size Finder Modal */}
+              <SizeFinder 
+                open={isSizeFinderOpen}
+                onClose={() => setIsSizeFinderOpen(false)}
+              />
             </div>
           </div>
         </div>
