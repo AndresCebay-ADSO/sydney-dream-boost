@@ -62,7 +62,7 @@ export const Story = () => {
           {/* Quote */}
           <blockquote className="mt-16 text-center">
             <p className="text-xl sm:text-2xl font-display italic text-foreground">
-              "Cada paso que doy es por Colombia, cada kilómetro es un sueño más cerca de la realidad."
+              "Haz de tu vida un sueño y de tu sueño una realidad"
             </p>
             <cite className="block mt-4 text-primary font-medium">— Martín Perdomo</cite>
           </blockquote>

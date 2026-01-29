@@ -73,13 +73,13 @@ export const Product = ({
                 /* Mobile Carousel */
                 <Carousel className="w-full">
                   <CarouselContent>
-                    {productImages.map((image, index) => (
+                {productImages.map((image, index) => (
                       <CarouselItem key={index}>
-                        <div className="relative aspect-square rounded-2xl overflow-hidden bg-gradient-card border border-border shadow-glow">
+                        <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-gradient-card border border-border shadow-glow">
                           <img 
                             src={image.src}
                             alt={image.alt}
-                            className={`w-full h-full object-cover transition-opacity duration-500 ${loadedImages.has(index) ? 'opacity-100' : 'opacity-0'}`}
+                            className={`w-full h-full object-contain transition-opacity duration-500 ${loadedImages.has(index) ? 'opacity-100' : 'opacity-0'}`}
                             onLoad={() => handleImageLoad(index)}
                           />
                           {!loadedImages.has(index) && (
@@ -196,6 +196,11 @@ export const Product = ({
 
               <p className="text-center text-sm text-muted-foreground">
                 🔒 Tu información está segura. Pago al momento de la entrega.
+              </p>
+
+              {/* Inspirational quote */}
+              <p className="text-center text-sm italic text-muted-foreground pt-4 border-t border-border">
+                "El único que define lo que puedes lograr eres tú"
               </p>
 
               {/* Size Finder Modal */}

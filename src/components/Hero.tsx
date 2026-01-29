@@ -36,7 +36,11 @@ export const Hero = ({ onOrderClick, availableShirts }: HeroProps) => {
           </h1>
 
           {/* Subtitle */}
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: "0.2s" }}>
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in italic" style={{ animationDelay: "0.2s" }}>
+            "El mundo se hizo para correr"
+          </p>
+          
+          <p className="text-base text-muted-foreground max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: "0.25s" }}>
             Un colombiano que representará a su país en una de las 7 maratones más importantes del mundo
           </p>
 
