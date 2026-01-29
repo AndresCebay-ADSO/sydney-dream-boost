@@ -14,8 +14,7 @@ import { z } from "zod";
 interface OrderModalProps {
   open: boolean;
   onClose: () => void;
-  selectedSize: string;
-  onOrderComplete: (order: OrderData) => void;
+  onOrderComplete: () => void;
 }
 
 export interface OrderData {
@@ -23,7 +22,6 @@ export interface OrderData {
   phone: string;
   address: string;
   city: string;
-  size: string;
 }
 
 const orderSchema = z.object({
@@ -33,14 +31,13 @@ const orderSchema = z.object({
   city: z.string().min(3, "Ingresa una ciudad válida").max(50),
 });
 
-export const OrderModal = ({ open, onClose, selectedSize, onOrderComplete }: OrderModalProps) => {
+export const OrderModal = ({ open, onClose, onOrderComplete }: OrderModalProps) => {
   const [step, setStep] = useState<"form" | "confirm" | "success">("form");
   const [formData, setFormData] = useState<OrderData>({
     name: "",
     phone: "",
     address: "",
     city: "",
-    size: selectedSize,
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -77,13 +74,13 @@ export const OrderModal = ({ open, onClose, selectedSize, onOrderComplete }: Ord
   };
 
   const handleConfirm = () => {
-    onOrderComplete({ ...formData, size: selectedSize });
+    onOrderComplete();
     setStep("success");
   };
 
   const handleClose = () => {
     setStep("form");
-    setFormData({ name: "", phone: "", address: "", city: "", size: "" });
+    setFormData({ name: "", phone: "", address: "", city: "" });
     setErrors({});
     onClose();
   };
@@ -125,7 +122,7 @@ export const OrderModal = ({ open, onClose, selectedSize, onOrderComplete }: Ord
                 </div>
                 <div className="flex items-center justify-between mt-2">
                   <span className="text-muted-foreground">Talla</span>
-                  <span className="font-medium text-primary">{selectedSize}</span>
+                  <span className="font-medium text-primary">Única</span>
                 </div>
                 <div className="flex items-center justify-between mt-2">
                   <span className="text-muted-foreground">Precio</span>
@@ -237,7 +234,7 @@ export const OrderModal = ({ open, onClose, selectedSize, onOrderComplete }: Ord
                 </div>
                 <div className="pt-3 border-t border-border flex justify-between">
                   <span className="text-muted-foreground">Talla</span>
-                  <span className="font-bold text-primary">{selectedSize}</span>
+                  <span className="font-bold text-primary">Única</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Total a pagar</span>
@@ -275,7 +272,7 @@ export const OrderModal = ({ open, onClose, selectedSize, onOrderComplete }: Ord
 
               <div className="p-4 rounded-lg bg-secondary border border-border text-left">
                 <p className="text-sm text-muted-foreground mb-2">Resumen del pedido:</p>
-                <p className="font-medium">Camiseta Team Tincho - Talla {selectedSize}</p>
+                <p className="font-medium">Camiseta Team Tincho - Talla Única</p>
                 <p className="text-primary font-bold">$80.000 COP (pago contraentrega)</p>
               </div>
 
