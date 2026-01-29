@@ -2,7 +2,18 @@ import { useState } from "react";
 import { Check, Package, Truck, HelpCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SizeFinder } from "@/components/SizeFinder";
+import { useIsMobile } from "@/hooks/use-mobile";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import camisetaImage from "@/assets/camiseta-berlin.png";
+import camisaPecho from "@/assets/camisa-pecho.png";
+import camisaEspalda from "@/assets/camisa-espalda.png";
+import camisaDetalle from "@/assets/camisa-detalle.jpg";
 
 interface ProductProps {
   onOrderClick: () => void;
@@ -15,12 +26,25 @@ const features = [
   { icon: Check, text: "Pago contraentrega seguro" },
 ];
 
+const productImages = [
+  { src: camisetaImage, alt: "Camiseta Team Tincho - Vista principal" },
+  { src: camisaPecho, alt: "Camiseta Team Tincho - Vista frontal" },
+  { src: camisaEspalda, alt: "Camiseta Team Tincho - Vista trasera" },
+  { src: camisaDetalle, alt: "Camiseta Team Tincho - Detalle del diseño" },
+];
+
 export const Product = ({ 
   onOrderClick, 
   availableShirts 
 }: ProductProps) => {
-  const [imageLoaded, setImageLoaded] = useState(false);
+  const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
   const [isSizeFinderOpen, setIsSizeFinderOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(0);
+  const isMobile = useIsMobile();
+
+  const handleImageLoad = (index: number) => {
+    setLoadedImages(prev => new Set(prev).add(index));
+  };
 
   return (
     <section id="producto" className="py-24 bg-charcoal relative overflow-hidden">
@@ -43,22 +67,72 @@ export const Product = ({
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Product Image */}
+            {/* Product Images */}
             <div className="relative">
-              <div className="relative aspect-square rounded-2xl overflow-hidden bg-gradient-card border border-border shadow-glow">
-                <img 
-                  src={camisetaImage}
-                  alt="Camiseta Team Tincho - Road to Sydney 2026"
-                  className={`w-full h-full object-cover transition-opacity duration-500 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
-                  onLoad={() => setImageLoaded(true)}
-                />
-                {!imageLoaded && (
-                  <div className="absolute inset-0 bg-secondary animate-pulse" />
-                )}
-              </div>
+              {isMobile ? (
+                /* Mobile Carousel */
+                <Carousel className="w-full">
+                  <CarouselContent>
+                    {productImages.map((image, index) => (
+                      <CarouselItem key={index}>
+                        <div className="relative aspect-square rounded-2xl overflow-hidden bg-gradient-card border border-border shadow-glow">
+                          <img 
+                            src={image.src}
+                            alt={image.alt}
+                            className={`w-full h-full object-cover transition-opacity duration-500 ${loadedImages.has(index) ? 'opacity-100' : 'opacity-0'}`}
+                            onLoad={() => handleImageLoad(index)}
+                          />
+                          {!loadedImages.has(index) && (
+                            <div className="absolute inset-0 bg-secondary animate-pulse" />
+                          )}
+                        </div>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  <CarouselPrevious className="left-2" />
+                  <CarouselNext className="right-2" />
+                </Carousel>
+              ) : (
+                /* Desktop Grid with main image and thumbnails */
+                <div className="space-y-4">
+                  {/* Main Image */}
+                  <div className="relative aspect-square rounded-2xl overflow-hidden bg-gradient-card border border-border shadow-glow">
+                    <img 
+                      src={productImages[selectedImage].src}
+                      alt={productImages[selectedImage].alt}
+                      className={`w-full h-full object-cover transition-opacity duration-500 ${loadedImages.has(selectedImage) ? 'opacity-100' : 'opacity-0'}`}
+                      onLoad={() => handleImageLoad(selectedImage)}
+                    />
+                    {!loadedImages.has(selectedImage) && (
+                      <div className="absolute inset-0 bg-secondary animate-pulse" />
+                    )}
+                  </div>
+                  
+                  {/* Thumbnails */}
+                  <div className="grid grid-cols-4 gap-3">
+                    {productImages.map((image, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setSelectedImage(index)}
+                        className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-all duration-200 ${
+                          selectedImage === index 
+                            ? 'border-primary shadow-gold' 
+                            : 'border-border hover:border-primary/50'
+                        }`}
+                      >
+                        <img 
+                          src={image.src}
+                          alt={image.alt}
+                          className="w-full h-full object-cover"
+                        />
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               {/* Availability badge */}
-              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-background border border-primary px-6 py-3 rounded-full shadow-gold">
+              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-background border border-primary px-6 py-3 rounded-full shadow-gold z-10">
                 <span className="text-sm font-medium">
                   Quedan <span className="text-primary font-bold">{availableShirts}</span> de 100
                 </span>
