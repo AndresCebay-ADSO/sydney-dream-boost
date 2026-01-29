@@ -1,17 +1,12 @@
 import { useState } from "react";
-import { Check, Ruler, Package, Truck } from "lucide-react";
+import { Check, Package, Truck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import camisetaImage from "@/assets/camiseta-berlin.png";
 
 interface ProductProps {
   onOrderClick: () => void;
-  onSizeFinderClick: () => void;
-  selectedSize: string;
-  onSizeChange: (size: string) => void;
   availableShirts: number;
 }
-
-const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
 
 const features = [
   { icon: Package, text: "Material deportivo de alta calidad" },
@@ -21,9 +16,6 @@ const features = [
 
 export const Product = ({ 
   onOrderClick, 
-  onSizeFinderClick, 
-  selectedSize, 
-  onSizeChange,
   availableShirts 
 }: ProductProps) => {
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -97,32 +89,12 @@ export const Product = ({
                 ))}
               </div>
 
-              {/* Size Selector */}
-              <div>
-                <div className="flex items-center justify-between mb-4">
-                  <label className="font-medium">Selecciona tu talla</label>
-                  <button 
-                    onClick={onSizeFinderClick}
-                    className="text-sm text-primary hover:underline flex items-center gap-1"
-                  >
-                    <Ruler className="w-4 h-4" />
-                    Encontrar mi talla
-                  </button>
-                </div>
-                <div className="grid grid-cols-6 gap-2">
-                  {sizes.map((size) => (
-                    <button
-                      key={size}
-                      onClick={() => onSizeChange(size)}
-                      className={`py-3 rounded-lg font-medium text-sm transition-all duration-200 ${
-                        selectedSize === size
-                          ? "bg-primary text-primary-foreground shadow-gold"
-                          : "bg-secondary hover:bg-secondary/80 border border-border"
-                      }`}
-                    >
-                      {size}
-                    </button>
-                  ))}
+              {/* Talla única badge */}
+              <div className="p-4 rounded-lg bg-primary/10 border border-primary/30 flex items-center gap-3">
+                <Check className="w-5 h-5 text-primary flex-shrink-0" />
+                <div>
+                  <span className="font-medium text-foreground">Talla única</span>
+                  <p className="text-sm text-muted-foreground">Diseño versátil que se adapta a todos</p>
                 </div>
               </div>
 
@@ -130,10 +102,9 @@ export const Product = ({
               <Button 
                 size="lg" 
                 onClick={onOrderClick}
-                disabled={!selectedSize}
-                className="w-full bg-primary text-primary-foreground hover:bg-gold-light font-display font-semibold text-lg py-6 shadow-gold hover:shadow-glow transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-primary text-primary-foreground hover:bg-gold-light font-display font-semibold text-lg py-6 shadow-gold hover:shadow-glow transition-all duration-300"
               >
-                {selectedSize ? `Reservar talla ${selectedSize}` : "Selecciona una talla"}
+                Reservar ahora
               </Button>
 
               <p className="text-center text-sm text-muted-foreground">
