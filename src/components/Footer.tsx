@@ -13,63 +13,63 @@ const TikTokIcon = ({ className }: { className?: string }) => (
 
 export const Footer = () => {
   return (
-    <footer className="py-12 bg-charcoal border-t border-border">
-      <div className="container px-4">
+    <footer className="py-8 sm:py-12 bg-charcoal border-t border-border">
+      <div className="container px-4 sm:px-6">
         <div className="max-w-4xl mx-auto text-center">
           {/* Logo / Brand */}
-          <div className="mb-6">
-            <h3 className="font-display text-2xl font-bold">
+          <div className="mb-4 sm:mb-6">
+            <h3 className="font-display text-xl sm:text-2xl font-bold">
               <span className="text-gradient-gold">Team Tincho</span>
             </h3>
-            <p className="text-muted-foreground mt-2">Road to Sydney 2026</p>
+            <p className="text-sm sm:text-base text-muted-foreground mt-2">Road to Sydney 2026</p>
           </div>
 
           {/* Social links */}
-          <div className="flex justify-center gap-4 mb-8">
+          <div className="flex justify-center gap-3 sm:gap-4 mb-6 sm:mb-8">
             <a 
               href="https://www.youtube.com/@paracutiti" 
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full bg-secondary hover:bg-primary/20 flex items-center justify-center transition-colors"
+              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-secondary hover:bg-primary/20 flex items-center justify-center transition-colors"
               aria-label="YouTube"
             >
-              <Youtube className="w-5 h-5" />
+              <Youtube className="w-4 h-4 sm:w-5 sm:h-5" />
             </a>
             <a 
               href="https://www.instagram.com/tincho___________/" 
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full bg-secondary hover:bg-primary/20 flex items-center justify-center transition-colors"
+              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-secondary hover:bg-primary/20 flex items-center justify-center transition-colors"
               aria-label="Instagram"
             >
-              <Instagram className="w-5 h-5" />
+              <Instagram className="w-4 h-4 sm:w-5 sm:h-5" />
             </a>
             <a 
               href="https://www.tiktok.com/@martin_perdomo25" 
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full bg-secondary hover:bg-primary/20 flex items-center justify-center transition-colors"
+              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-secondary hover:bg-primary/20 flex items-center justify-center transition-colors"
               aria-label="TikTok"
             >
-              <TikTokIcon className="w-5 h-5" />
+              <TikTokIcon className="w-4 h-4 sm:w-5 sm:h-5" />
             </a>
             <a 
               href="https://www.facebook.com/people/Mart%C3%ADn-Perdomo/61572307716831/" 
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full bg-secondary hover:bg-primary/20 flex items-center justify-center transition-colors"
+              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-secondary hover:bg-primary/20 flex items-center justify-center transition-colors"
               aria-label="Facebook"
             >
-              <Facebook className="w-5 h-5" />
+              <Facebook className="w-4 h-4 sm:w-5 sm:h-5" />
             </a>
           </div>
 
           {/* Copyright */}
-          <p className="text-sm text-muted-foreground">
+          <p className="text-xs sm:text-sm text-muted-foreground">
             © {new Date().getFullYear()} Team Tincho. Todos los derechos reservados.
           </p>
-          <p className="text-sm text-muted-foreground mt-2 flex items-center justify-center gap-1">
-            Hecho con <Heart className="w-4 h-4 text-accent" /> en Colombia
+          <p className="text-xs sm:text-sm text-muted-foreground mt-2 flex items-center justify-center gap-1">
+            Hecho con <Heart className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-accent" /> en Colombia
           </p>
         </div>
       </div>

@@ -47,26 +47,26 @@ export const Product = ({
   };
 
   return (
-    <section id="producto" className="py-24 bg-charcoal relative overflow-hidden">
+    <section id="producto" className="py-16 sm:py-24 bg-charcoal relative overflow-hidden">
       {/* Background elements */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
       <div className="absolute -right-40 top-1/2 -translate-y-1/2 w-80 h-80 bg-primary/5 rounded-full blur-3xl" />
 
-      <div className="container px-4">
+      <div className="container px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
           {/* Section header */}
-          <div className="text-center mb-16">
-            <span className="text-primary font-medium text-sm uppercase tracking-wider">Producto Exclusivo</span>
-            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mt-4">
+          <div className="text-center mb-10 sm:mb-16">
+            <span className="text-primary font-medium text-xs sm:text-sm uppercase tracking-wider">Producto Exclusivo</span>
+            <h2 className="font-display text-2xl sm:text-4xl md:text-5xl font-bold mt-3 sm:mt-4 px-2">
               Camiseta Oficial
               <span className="text-gradient-gold"> Team Tincho</span>
             </h2>
-            <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base text-muted-foreground mt-3 sm:mt-4 max-w-2xl mx-auto px-4">
               Edición limitada de 100 unidades. Cada camiseta representa tu apoyo al sueño de Martín.
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
             {/* Product Images */}
             <div className="relative">
               {isMobile ? (
@@ -132,18 +132,18 @@ export const Product = ({
               )}
 
               {/* Availability badge */}
-              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-background border border-primary px-6 py-3 rounded-full shadow-gold z-10">
-                <span className="text-sm font-medium">
+              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-background border border-primary px-4 sm:px-6 py-2 sm:py-3 rounded-full shadow-gold z-10">
+                <span className="text-xs sm:text-sm font-medium whitespace-nowrap">
                   Quedan <span className="text-primary font-bold">{availableShirts}</span> de 100
                 </span>
               </div>
             </div>
 
             {/* Product Details */}
-            <div className="space-y-8">
+            <div className="space-y-6 sm:space-y-8 mt-8 lg:mt-0">
               <div>
-                <h3 className="font-display text-2xl font-bold mb-2">Road to Sydney 2026</h3>
-                <p className="text-muted-foreground">
+                <h3 className="font-display text-xl sm:text-2xl font-bold mb-2">Road to Sydney 2026</h3>
+                <p className="text-sm sm:text-base text-muted-foreground">
                   Camiseta deportiva de alta calidad con diseño exclusivo que representa 
                   el viaje de Martín hacia la Maratón de Sídney.
                 </p>
@@ -151,35 +151,35 @@ export const Product = ({
 
               {/* Price */}
               <div className="flex items-baseline gap-2">
-                <span className="font-display text-4xl font-bold text-gradient-gold">$80.000</span>
-                <span className="text-muted-foreground">COP</span>
+                <span className="font-display text-3xl sm:text-4xl font-bold text-gradient-gold">$80.000</span>
+                <span className="text-sm sm:text-base text-muted-foreground">COP</span>
               </div>
 
               {/* Features */}
-              <div className="space-y-3">
+              <div className="space-y-2 sm:space-y-3">
                 {features.map((feature, index) => (
-                  <div key={index} className="flex items-center gap-3 text-sm">
-                    <feature.icon className="w-5 h-5 text-primary" />
+                  <div key={index} className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm">
+                    <feature.icon className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0" />
                     <span className="text-muted-foreground">{feature.text}</span>
                   </div>
                 ))}
               </div>
 
               {/* Talla única badge */}
-              <div className="p-4 rounded-lg bg-primary/10 border border-primary/30 flex items-center gap-3">
-                <Check className="w-5 h-5 text-primary flex-shrink-0" />
+              <div className="p-3 sm:p-4 rounded-lg bg-primary/10 border border-primary/30 flex items-center gap-2 sm:gap-3">
+                <Check className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0" />
                 <div>
-                  <span className="font-medium text-foreground">Talla única</span>
-                  <p className="text-sm text-muted-foreground">Diseño versátil que se adapta a todos</p>
+                  <span className="font-medium text-sm sm:text-base text-foreground">Talla única</span>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Diseño versátil que se adapta a todos</p>
                 </div>
               </div>
 
               {/* CTA */}
-              <div className="flex gap-3">
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                 <Button 
                   size="lg" 
                   onClick={onOrderClick}
-                  className="flex-1 bg-primary text-primary-foreground hover:bg-gold-light font-display font-semibold text-lg py-6 shadow-gold hover:shadow-glow transition-all duration-300"
+                  className="flex-1 bg-primary text-primary-foreground hover:bg-gold-light font-display font-semibold text-base sm:text-lg py-5 sm:py-6 shadow-gold hover:shadow-glow transition-all duration-300"
                 >
                   Reservar ahora
                 </Button>
@@ -187,19 +187,19 @@ export const Product = ({
                   size="lg" 
                   variant="outline"
                   onClick={() => setIsSizeFinderOpen(true)}
-                  className="border-border hover:border-primary/50 font-display font-medium text-lg py-6 transition-all duration-300"
+                  className="border-border hover:border-primary/50 font-display font-medium text-base sm:text-lg py-5 sm:py-6 transition-all duration-300"
                 >
-                  <HelpCircle className="w-5 h-5 mr-2" />
+                  <HelpCircle className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                   ¿Es para mí?
                 </Button>
               </div>
 
-              <p className="text-center text-sm text-muted-foreground">
+              <p className="text-center text-xs sm:text-sm text-muted-foreground">
                 🔒 Tu información está segura. Pago al momento de la entrega.
               </p>
 
               {/* Inspirational quote */}
-              <p className="text-center text-sm italic text-muted-foreground pt-4 border-t border-border">
+              <p className="text-center text-xs sm:text-sm italic text-muted-foreground pt-4 border-t border-border">
                 "El único que define lo que puedes lograr eres tú"
               </p>
 
