@@ -51,9 +51,9 @@ export const Footer = () => {
               </p>
               <div className="flex items-center gap-1.5 text-xs sm:text-sm text-muted-foreground">
                 <MapPin className="w-3.5 h-3.5 text-primary flex-shrink-0" />
-                <span>Berlín</span>
+                <span>La Plata</span>
                 <span className="text-primary">→</span>
-                <span>Sídney</span>
+                <span>Sidney</span>
               </div>
             </div>
 
@@ -104,8 +104,7 @@ export const Footer = () => {
       {/* Bottom bar */}
       <div className="border-t border-border">
         <div className="container px-4 sm:px-6 py-4 sm:py-6">
-          <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 text-xs sm:text-sm text-muted-foreground">
-            <p>© {new Date().getFullYear()} Team Tincho. Todos los derechos reservados.</p>
+          <div className="max-w-6xl mx-auto text-center text-xs sm:text-sm text-muted-foreground">
             <p>
               Hecho con poco tiempo por Andrés Cebay y Camero Bastidas
             </p>

@@ -50,6 +50,12 @@ export const Product = ({ onOrderClick }: ProductProps) => {
 
       <div className="container px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
+          {/* Section header */}
+          <div className="text-center mb-10 sm:mb-16">
+            <h2 className="font-display text-2xl sm:text-4xl md:text-5xl font-bold px-2">
+              <span className="text-gradient-gold">Berlin Legacy</span> 2025
+            </h2>
+          </div>
 
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
             {/* Product Images */}
