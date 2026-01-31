@@ -21,13 +21,6 @@ export const Hero = ({ onOrderClick, availableShirts }: HeroProps) => {
 
       <div className="container relative z-10 px-4 sm:px-6 py-16 sm:py-20">
         <div className="max-w-4xl mx-auto text-center space-y-6 sm:space-y-8">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-secondary border border-border animate-fade-in">
-            <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-            <span className="text-xs sm:text-sm font-medium text-muted-foreground">
-              Solo <span className="text-primary font-bold">{availableShirts}</span> camisetas disponibles
-            </span>
-          </div>
 
           {/* Main heading */}
           <h1 className="font-display text-3xl sm:text-5xl md:text-7xl font-bold leading-tight animate-fade-in px-2" style={{ animationDelay: "0.1s" }}>
@@ -65,7 +58,7 @@ export const Hero = ({ onOrderClick, availableShirts }: HeroProps) => {
             <Button 
               size="lg" 
               onClick={onOrderClick}
-              className="bg-primary text-primary-foreground hover:bg-gold-light font-display font-semibold text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 shadow-gold hover:shadow-glow transition-all duration-300"
+              className="bg-primary text-primary-foreground hover:bg-colombia-red-light font-display font-semibold text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 shadow-gold hover:shadow-glow transition-all duration-300"
             >
               Reservar mi camiseta
             </Button>

@@ -179,7 +179,7 @@ export const Product = ({
                 <Button 
                   size="lg" 
                   onClick={onOrderClick}
-                  className="flex-1 bg-primary text-primary-foreground hover:bg-gold-light font-display font-semibold text-base sm:text-lg py-5 sm:py-6 shadow-gold hover:shadow-glow transition-all duration-300"
+                  className="flex-1 bg-primary text-primary-foreground hover:bg-colombia-red-light font-display font-semibold text-base sm:text-lg py-5 sm:py-6 shadow-gold hover:shadow-glow transition-all duration-300"
                 >
                   Reservar ahora
                 </Button>

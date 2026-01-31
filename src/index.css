@@ -6,55 +6,58 @@
 
 @layer base {
   :root {
-    --background: 0 0% 5%;
-    --foreground: 45 10% 95%;
+    /* Colores Colombia - Negro, Rojo, Amarillo */
+    --background: 0 0% 4%;
+    --foreground: 0 0% 100%;
 
-    --card: 0 0% 8%;
-    --card-foreground: 45 10% 95%;
+    --card: 0 0% 9%;
+    --card-foreground: 0 0% 100%;
 
-    --popover: 0 0% 8%;
-    --popover-foreground: 45 10% 95%;
+    --popover: 0 0% 9%;
+    --popover-foreground: 0 0% 100%;
 
-    --primary: 45 100% 50%;
-    --primary-foreground: 0 0% 5%;
+    /* Rojo Colombia como primario */
+    --primary: 0 84% 50%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 12%;
-    --secondary-foreground: 45 10% 95%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 100%;
 
     --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 60%;
+    --muted-foreground: 0 0% 65%;
 
-    --accent: 5 80% 55%;
-    --accent-foreground: 45 10% 95%;
+    /* Amarillo Colombia como accent */
+    --accent: 48 96% 53%;
+    --accent-foreground: 0 0% 4%;
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 45 10% 95%;
+    --destructive: 0 84% 46%;
+    --destructive-foreground: 0 0% 100%;
 
     --border: 0 0% 18%;
     --input: 0 0% 18%;
-    --ring: 45 100% 50%;
+    --ring: 0 84% 50%;
 
     --radius: 0.75rem;
 
-    /* Custom colors */
-    --gold: 45 100% 50%;
-    --gold-light: 48 100% 60%;
-    --gold-dark: 42 100% 40%;
-    --fire-red: 5 80% 55%;
-    --fire-orange: 25 100% 55%;
-    --charcoal: 0 0% 8%;
-    --charcoal-light: 0 0% 12%;
+    /* Custom colors - Colombia theme */
+    --colombia-red: 0 84% 50%;
+    --colombia-red-light: 0 84% 58%;
+    --colombia-red-dark: 0 84% 42%;
+    --colombia-yellow: 48 96% 53%;
+    --colombia-yellow-light: 48 96% 60%;
+    --charcoal: 0 0% 9%;
+    --charcoal-light: 0 0% 15%;
 
-    /* Gradients */
-    --gradient-fire: linear-gradient(180deg, hsl(0 0% 10%) 0%, hsl(5 80% 35%) 50%, hsl(45 100% 50%) 100%);
-    --gradient-gold: linear-gradient(135deg, hsl(45 100% 50%) 0%, hsl(42 100% 40%) 100%);
-    --gradient-hero: linear-gradient(180deg, hsl(0 0% 5%) 0%, hsl(0 0% 8%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(0 0% 10%) 0%, hsl(0 0% 6%) 100%);
+    /* Gradients - Colombia theme */
+    --gradient-colombia: linear-gradient(180deg, hsl(0 0% 4%) 0%, hsl(0 84% 35%) 50%, hsl(48 96% 53%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(0 84% 50%) 0%, hsl(48 96% 53%) 100%);
+    --gradient-hero: linear-gradient(180deg, hsl(0 0% 4%) 0%, hsl(0 0% 9%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 12%) 0%, hsl(0 0% 6%) 100%);
 
     /* Shadows */
-    --shadow-gold: 0 10px 40px -10px hsl(45 100% 50% / 0.3);
+    --shadow-primary: 0 10px 40px -10px hsl(0 84% 50% / 0.4);
     --shadow-card: 0 20px 60px -20px hsl(0 0% 0% / 0.5);
-    --shadow-glow: 0 0 60px hsl(45 100% 50% / 0.15);
+    --shadow-glow: 0 0 60px hsl(0 84% 50% / 0.2);
   }
 
   .dark {
@@ -83,34 +86,39 @@
 }
 
 @layer utilities {
+  /* Gradient Colombia: Rojo a Amarillo */
   .text-gradient-gold {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(45 100% 50%) 0%, hsl(48 100% 60%) 100%);
+    background-image: linear-gradient(135deg, hsl(0 84% 50%) 0%, hsl(48 96% 53%) 100%);
   }
 
   .text-gradient-fire {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(180deg, hsl(45 100% 55%) 0%, hsl(5 80% 55%) 100%);
+    background-image: linear-gradient(180deg, hsl(48 96% 53%) 0%, hsl(0 84% 50%) 100%);
   }
 
   .bg-gradient-fire {
-    background: linear-gradient(180deg, hsl(0 0% 15%) 0%, hsl(5 60% 25%) 40%, hsl(45 100% 45%) 100%);
+    background: linear-gradient(180deg, hsl(0 0% 15%) 0%, hsl(0 84% 35%) 40%, hsl(48 96% 53%) 100%);
+  }
+
+  .bg-gradient-colombia {
+    background: linear-gradient(180deg, hsl(0 0% 4%) 0%, hsl(0 84% 35%) 50%, hsl(48 96% 53%) 100%);
   }
 
   .bg-gradient-hero {
-    background: linear-gradient(180deg, hsl(0 0% 5%) 0%, hsl(0 0% 8%) 100%);
+    background: linear-gradient(180deg, hsl(0 0% 4%) 0%, hsl(0 0% 9%) 100%);
   }
 
   .bg-gradient-card {
-    background: linear-gradient(145deg, hsl(0 0% 10%) 0%, hsl(0 0% 6%) 100%);
+    background: linear-gradient(145deg, hsl(0 0% 12%) 0%, hsl(0 0% 6%) 100%);
   }
 
   .shadow-gold {
-    box-shadow: 0 10px 40px -10px hsl(45 100% 50% / 0.3);
+    box-shadow: 0 10px 40px -10px hsl(0 84% 50% / 0.4);
   }
 
   .shadow-glow {
-    box-shadow: 0 0 60px hsl(45 100% 50% / 0.15);
+    box-shadow: 0 0 60px hsl(0 84% 50% / 0.2);
   }
 
   .animate-float {
@@ -133,8 +141,8 @@
 }
 
 @keyframes pulse-gold {
-  0%, 100% { box-shadow: 0 0 20px hsl(45 100% 50% / 0.3); }
-  50% { box-shadow: 0 0 40px hsl(45 100% 50% / 0.5); }
+  0%, 100% { box-shadow: 0 0 20px hsl(0 84% 50% / 0.3); }
+  50% { box-shadow: 0 0 40px hsl(0 84% 50% / 0.5); }
 }
 
 @keyframes gradient {
