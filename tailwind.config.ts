@@ -56,7 +56,6 @@ export default {
           "red-light": "hsl(var(--colombia-red-light))",
           "red-dark": "hsl(var(--colombia-red-dark))",
           yellow: "hsl(var(--colombia-yellow))",
-          "yellow-light": "hsl(var(--colombia-yellow-light))",
         },
         charcoal: {
           DEFAULT: "hsl(var(--charcoal))",
