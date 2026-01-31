@@ -10,30 +10,31 @@ export const Story = () => {
         <div className="max-w-4xl mx-auto">
           {/* Section header */}
           <div className="text-center mb-10 sm:mb-16">
-            <span className="text-primary font-medium text-xs sm:text-sm uppercase tracking-wider">La Historia</span>
-            <h2 className="font-display text-2xl sm:text-4xl md:text-5xl font-bold mt-3 sm:mt-4 px-2">
-              Un sueño que cruza
-              <span className="text-gradient-gold"> fronteras</span>
+            <span className="text-primary font-medium text-xs sm:text-sm uppercase tracking-[0.25em]">HISTORIA</span>
+            <h2 className="font-display text-3xl sm:text-5xl md:text-6xl font-bold mt-3 sm:mt-4 px-2">
+              Martin, De Berlin
+              <span className="text-gradient-gold"> a Sidney</span>
             </h2>
           </div>
 
           {/* Story content */}
           <div className="space-y-5 sm:space-y-8 text-base sm:text-lg text-muted-foreground leading-relaxed px-2">
-            <p className="text-foreground text-lg sm:text-xl font-medium">
-              Martín Perdomo es un atleta colombiano que ha dedicado años de su vida al running, 
-              superando obstáculos y persiguiendo un sueño que parecía imposible.
+            <p className="text-foreground text-lg sm:text-xl font-medium leading-relaxed">
+              Martín es un joven de 18 años de La Plata, Huila, que sin tener muchos recursos decidió 
+              tomarse en serio el deporte y ponerse una meta enorme: correr la Maratón de Berlín.
             </p>
             
             <p>
-              El <strong className="text-foreground">30 de agosto de 2026</strong>, Martín representará a Colombia 
-              en la <strong className="text-foreground">Maratón de Sídney</strong>, una de las siete maratones 
-              más importantes del mundo y parte del prestigioso circuito World Marathon Majors.
+              Empezó entrenando duro y mostrando su proceso en <strong className="text-foreground">TikTok</strong>, 
+              <strong className="text-foreground"> Instagram</strong> y <strong className="text-foreground">YouTube</strong>. 
+              Poco a poco la gente del pueblo lo fue conociendo y creyendo en él, tanto que comenzó a tocar 
+              puertas en tiendas, restaurantes y empresas locales hasta conseguir patrocinio.
             </p>
 
             <p>
-              Pero llegar hasta allí requiere más que determinación. Los costos de viaje, inscripción 
-              y preparación son significativos, y cada camiseta que adquieras es un paso más cerca 
-              de hacer realidad este sueño.
+              Con ese apoyo viajó a Berlín, corrió la maratón, la terminó y regresó a Colombia habiendo 
+              cumplido su sueño. <strong className="text-foreground">Lejos de conformarse</strong>, ahora ya 
+              está trabajando por su siguiente reto: correr la <strong className="text-foreground">Maratón de Sídney</strong>.
             </p>
           </div>
 
