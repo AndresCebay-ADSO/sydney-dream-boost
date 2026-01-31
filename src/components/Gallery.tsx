@@ -1,4 +1,7 @@
 import { MapPin, Trophy, Shirt, Target } from "lucide-react";
+import sidneyImage1 from "@/assets/sidney-1.jpg";
+import sidneyImage2 from "@/assets/sidney-2.avif";
+import sidneyImage3 from "@/assets/sidney-3.jpg";
 
 const galleryItems = [
   {
@@ -21,9 +24,10 @@ const galleryItems = [
   },
   {
     icon: MapPin,
-    title: "Destino. Sidney",
-    description: "Australia 2026: donde los sueños se hacen realidad",
+    title: "Rumbo a Sídney, Australia",
+    description: "2026: donde los sueños se hacen realidad",
     gradient: "from-primary/20 to-amber-500/20",
+    images: [sidneyImage1, sidneyImage2, sidneyImage3],
   },
 ];
 
@@ -66,9 +70,24 @@ export const Gallery = () => {
                   <h3 className="font-display text-lg sm:text-xl font-bold mb-2 text-foreground group-hover:text-primary transition-colors duration-300">
                     {item.title}
                   </h3>
-                  <p className="text-sm sm:text-base text-muted-foreground">
+                  <p className="text-sm sm:text-base text-muted-foreground mb-4">
                     {item.description}
                   </p>
+
+                  {/* Sydney Images */}
+                  {item.images && (
+                    <div className="grid grid-cols-3 gap-2 mt-4">
+                      {item.images.map((img, imgIndex) => (
+                        <div key={imgIndex} className="aspect-square rounded-lg overflow-hidden border border-border/50">
+                          <img 
+                            src={img} 
+                            alt={`Sídney ${imgIndex + 1}`} 
+                            className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 {/* Decorative corner */}
