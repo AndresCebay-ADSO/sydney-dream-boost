@@ -1,4 +1,4 @@
-import { Heart, Instagram, Youtube, Facebook } from "lucide-react";
+import { MapPin, Mail, Instagram, Youtube, Facebook } from "lucide-react";
 
 // TikTok icon component (no disponible en lucide-react)
 const TikTokIcon = ({ className }: { className?: string }) => (
@@ -11,66 +11,115 @@ const TikTokIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
+const navLinks = [
+  { label: "Inicio", href: "#" },
+  { label: "Historia", href: "#historia" },
+  { label: "Camiseta", href: "#producto" },
+  { label: "Galería", href: "#galeria" },
+];
+
+const socialLinks = [
+  { icon: Instagram, href: "https://www.instagram.com/tincho___________/", label: "Instagram" },
+  { icon: Facebook, href: "https://www.facebook.com/people/Mart%C3%ADn-Perdomo/61572307716831/", label: "Facebook" },
+  { icon: TikTokIcon, href: "https://www.tiktok.com/@martin_perdomo25", label: "TikTok" },
+  { icon: Youtube, href: "https://www.youtube.com/@paracutiti", label: "YouTube" },
+];
+
 export const Footer = () => {
+  const scrollToSection = (href: string) => {
+    if (href === "#") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+    const element = document.querySelector(href);
+    element?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
-    <footer className="py-8 sm:py-12 bg-charcoal border-t border-border">
-      <div className="container px-4 sm:px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          {/* Logo / Brand */}
-          <div className="mb-4 sm:mb-6">
-            <h3 className="font-display text-xl sm:text-2xl font-bold">
-              <span className="text-gradient-gold">Team Tincho</span>
-            </h3>
-            <p className="text-sm sm:text-base text-muted-foreground mt-2">Road to Sydney 2026</p>
-          </div>
+    <footer className="bg-charcoal border-t border-border">
+      <div className="container px-4 sm:px-6 py-12 sm:py-16">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8">
+            {/* Brand section */}
+            <div className="md:col-span-1">
+              <h3 className="font-display text-2xl sm:text-3xl font-bold mb-1">
+                Legacy Berlin 2025
+              </h3>
+              <div className="w-12 h-1 bg-primary rounded-full mb-4" />
+              <p className="text-sm sm:text-base text-muted-foreground mb-6 max-w-sm">
+                Un proyecto de superación que une a Colombia con el mundo. 
+                Apoya a Martín Perdomo en su camino hacia la Maratón de Sídney 2026.
+              </p>
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <MapPin className="w-4 h-4 text-primary flex-shrink-0" />
+                <span>Berlín, Alemania</span>
+                <span className="text-primary">→</span>
+                <span>Sídney, Australia</span>
+              </div>
+            </div>
 
-          {/* Social links */}
-          <div className="flex justify-center gap-3 sm:gap-4 mb-6 sm:mb-8">
-            <a 
-              href="https://www.youtube.com/@paracutiti" 
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-secondary hover:bg-primary/20 flex items-center justify-center transition-colors"
-              aria-label="YouTube"
-            >
-              <Youtube className="w-4 h-4 sm:w-5 sm:h-5" />
-            </a>
-            <a 
-              href="https://www.instagram.com/tincho___________/" 
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-secondary hover:bg-primary/20 flex items-center justify-center transition-colors"
-              aria-label="Instagram"
-            >
-              <Instagram className="w-4 h-4 sm:w-5 sm:h-5" />
-            </a>
-            <a 
-              href="https://www.tiktok.com/@martin_perdomo25" 
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-secondary hover:bg-primary/20 flex items-center justify-center transition-colors"
-              aria-label="TikTok"
-            >
-              <TikTokIcon className="w-4 h-4 sm:w-5 sm:h-5" />
-            </a>
-            <a 
-              href="https://www.facebook.com/people/Mart%C3%ADn-Perdomo/61572307716831/" 
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-secondary hover:bg-primary/20 flex items-center justify-center transition-colors"
-              aria-label="Facebook"
-            >
-              <Facebook className="w-4 h-4 sm:w-5 sm:h-5" />
-            </a>
-          </div>
+            {/* Navigation */}
+            <div className="md:col-span-1">
+              <h4 className="font-display font-semibold text-sm uppercase tracking-wider text-muted-foreground mb-4">
+                Navegación
+              </h4>
+              <nav className="flex flex-col gap-3">
+                {navLinks.map((link) => (
+                  <button
+                    key={link.label}
+                    onClick={() => scrollToSection(link.href)}
+                    className="text-left text-foreground hover:text-primary transition-colors text-sm sm:text-base"
+                  >
+                    {link.label}
+                  </button>
+                ))}
+              </nav>
+            </div>
 
-          {/* Copyright */}
-          <p className="text-xs sm:text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Team Tincho. Todos los derechos reservados.
-          </p>
-          <p className="text-xs sm:text-sm text-muted-foreground mt-2 flex items-center justify-center gap-1">
-            Hecho con <Heart className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-accent" /> en Colombia
-          </p>
+            {/* Connect */}
+            <div className="md:col-span-1">
+              <h4 className="font-display font-semibold text-sm uppercase tracking-wider text-muted-foreground mb-4">
+                Conecta
+              </h4>
+              
+              {/* Contact */}
+              <a 
+                href="mailto:contacto@teamtincho.com"
+                className="flex items-center gap-2 text-foreground hover:text-primary transition-colors mb-6 text-sm sm:text-base"
+              >
+                <Mail className="w-4 h-4" />
+                Contacto
+              </a>
+
+              {/* Social icons */}
+              <div className="flex gap-3">
+                {socialLinks.map((social) => (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-lg bg-secondary hover:bg-primary/20 flex items-center justify-center transition-colors"
+                    aria-label={social.label}
+                  >
+                    <social.icon className="w-5 h-5" />
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom bar */}
+      <div className="border-t border-border">
+        <div className="container px-4 sm:px-6 py-4 sm:py-6">
+          <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 text-xs sm:text-sm text-muted-foreground">
+            <p>© {new Date().getFullYear()} Team Tincho. Todos los derechos reservados.</p>
+            <p className="flex items-center gap-1">
+              Hecho con ❤️ en Colombia
+            </p>
+          </div>
         </div>
       </div>
     </footer>
