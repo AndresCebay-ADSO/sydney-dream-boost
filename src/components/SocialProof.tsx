@@ -44,21 +44,6 @@ export const SocialProof = () => {
             ))}
           </div>
 
-          {/* Testimonial / Message */}
-          <div className="mt-10 sm:mt-16 text-center p-5 sm:p-8 rounded-2xl bg-gradient-card border border-primary/20 shadow-glow">
-            <p className="text-base sm:text-2xl font-display text-foreground italic px-2">
-              "No dejes que nadie limite lo que eres capaz"
-            </p>
-            <div className="mt-4 flex items-center justify-center gap-2 sm:gap-3">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-primary-foreground font-bold text-sm sm:text-base">
-                MP
-              </div>
-              <div className="text-left">
-                <p className="font-semibold text-sm sm:text-base">Martín Perdomo</p>
-                <p className="text-xs sm:text-sm text-muted-foreground">Atleta Colombiano</p>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
