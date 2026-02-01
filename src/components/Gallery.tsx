@@ -14,6 +14,8 @@ import legacy3 from "@/assets/legacy-3.avif";
 import legacy4 from "@/assets/legacy-4.avif";
 import legacy5 from "@/assets/legacy-5.avif";
 import legacy6 from "@/assets/legacy-6.avif";
+import legacy7 from "@/assets/legacy-7.avif";
+import legacy8 from "@/assets/legacy-8.avif";
 
 // Carousel data for each section
 const carouselData = [
@@ -27,7 +29,7 @@ const carouselData = [
   },
   {
     title: "Camiseta Legacy",
-    images: [legacy1, legacy2, legacy3, legacy4, legacy5, legacy6],
+    images: [legacy1, legacy2, legacy3, legacy4, legacy5, legacy6, legacy7, legacy8],
   },
   {
     title: "Destino: Sídney 2026",
