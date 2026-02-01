@@ -126,7 +126,7 @@ export const OrderModal = ({ open, onClose, onOrderComplete }: OrderModalProps) 
                 </div>
                 <div className="flex items-center justify-between mt-2">
                   <span className="text-muted-foreground">Precio</span>
-                  <span className="font-bold text-gradient-gold">$80.000 COP</span>
+                  <span className="font-bold text-gradient-gold">$120.000 COP</span>
                 </div>
               </div>
 
@@ -241,7 +241,7 @@ export const OrderModal = ({ open, onClose, onOrderComplete }: OrderModalProps) 
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Total a pagar</span>
-                  <span className="font-bold text-gradient-gold">$80.000 COP</span>
+                  <span className="font-bold text-gradient-gold">$120.000 COP</span>
                 </div>
               </div>
 
@@ -276,9 +276,9 @@ export const OrderModal = ({ open, onClose, onOrderComplete }: OrderModalProps) 
               <div className="p-4 rounded-lg bg-secondary border border-border text-left">
                 <p className="text-sm text-muted-foreground mb-2">Resumen del pedido:</p>
                 <p className="font-medium">Camiseta Team Tincho - Talla Única</p>
-                <p className="text-primary font-bold">$80.000 COP</p>
+                <p className="text-primary font-bold">$120.000 COP</p>
                 <p className="text-xs text-muted-foreground mt-2">
-                  📲 Te contactaremos por WhatsApp para confirmar el pago y coordinar el envío.
+                  Te contactaremos por WhatsApp para confirmar el pago y coordinar el envío.
                 </p>
               </div>
 
