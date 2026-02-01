@@ -160,11 +160,11 @@ export const Gallery = () => {
     <section id="galeria" className="py-16 px-4 bg-neutral-900">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-12">
-          <span className="text-red-500 uppercase tracking-[0.25em] text-xs mt-3 block">
+        <div className="text-center mb-10 sm:mb-16">
+          <span className="text-primary font-medium text-xs sm:text-sm uppercase tracking-[0.25em]">
             GALERÍA
           </span>
-          <h2 className="text-4xl md:text-6xl text-white font-display font-bold mt-3">
+          <h2 className="font-display text-3xl sm:text-5xl md:text-6xl font-bold mt-3 sm:mt-4 px-2 text-white">
             El Recorrido
           </h2>
         </div>

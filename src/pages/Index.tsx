@@ -7,6 +7,7 @@ import { Gallery } from "@/components/Gallery";
 import { SocialProof } from "@/components/SocialProof";
 import { Footer } from "@/components/Footer";
 import { OrderModal } from "@/components/OrderModal";
+import { ScrollToTop } from "@/components/ScrollToTop";
 
 const Index = () => {
   const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
@@ -39,6 +40,9 @@ const Index = () => {
         onClose={() => setIsOrderModalOpen(false)}
         onOrderComplete={() => {}}
       />
+
+      {/* Scroll to Product Button */}
+      <ScrollToTop />
     </div>
   );
 };

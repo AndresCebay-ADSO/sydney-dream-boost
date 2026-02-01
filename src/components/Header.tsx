@@ -58,6 +58,12 @@ export const Header = ({ onOrderClick }: HeaderProps) => {
             >
               Producto
             </button>
+            <button 
+              onClick={() => scrollToSection("galeria")}
+              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Galería
+            </button>
             <Button 
               onClick={onOrderClick}
               size="sm"
@@ -99,6 +105,12 @@ export const Header = ({ onOrderClick }: HeaderProps) => {
               className="text-left py-3 px-4 rounded-lg font-medium text-foreground hover:bg-secondary transition-colors"
             >
               Producto
+            </button>
+            <button 
+              onClick={() => scrollToSection("galeria")}
+              className="text-left py-3 px-4 rounded-lg font-medium text-foreground hover:bg-secondary transition-colors"
+            >
+              Galería
             </button>
             
             <div className="pt-4 mt-4 border-t border-border">
