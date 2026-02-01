@@ -1,4 +1,4 @@
-import heroImage from "@/assets/hero.jpg";
+import heroImage from "@/assets/hero.webp";
 import sidneyMeta from "@/assets/sidney-1.jpg";
 import camisetaImage from "@/assets/camisa-pecho.png";
 import sidneyOpera from "@/assets/sidney-2.avif";
