@@ -136,7 +136,7 @@ export const Product = ({ onOrderClick }: ProductProps) => {
 
               {/* Price */}
               <div className="flex items-baseline gap-2">
-                <span className="font-display text-3xl sm:text-4xl font-bold text-gradient-gold">$80.000</span>
+                <span className="font-display text-3xl sm:text-4xl font-bold text-gradient-gold">$120.000</span>
                 <span className="text-sm sm:text-base text-muted-foreground">COP</span>
               </div>
 
