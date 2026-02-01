@@ -1,6 +1,6 @@
 import { ArrowDown, MapPin, Calendar, Target } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import heroImage from "@/assets/hero.jpg";
+import heroImage from "@/assets/hero.webp";
 
 interface HeroProps {
   onOrderClick: () => void;
