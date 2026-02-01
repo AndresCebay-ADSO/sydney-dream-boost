@@ -105,9 +105,7 @@ export const Footer = () => {
       <div className="border-t border-border">
         <div className="container px-4 sm:px-6 py-4 sm:py-6">
           <div className="max-w-6xl mx-auto text-center text-xs sm:text-sm text-muted-foreground">
-            <p>
-              Hecho con poco tiempo por Andrés Cebay y Camero Bastidas
-            </p>
+          <p>Tincho 2026</p>
           </div>
         </div>
       </div>

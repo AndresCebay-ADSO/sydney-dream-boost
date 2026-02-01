@@ -28,11 +28,7 @@ export const Hero = ({ onOrderClick }: HeroProps) => {
           </h1>
 
           {/* Subtitle */}
-          <p className="text-base sm:text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in italic px-4" style={{ animationDelay: "0.2s" }}>
-            "El mundo se hizo para correr"
-          </p>
-          
-          <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto animate-fade-in px-4" style={{ animationDelay: "0.25s" }}>
+          <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto animate-fade-in px-4" style={{ animationDelay: "0.2s" }}>
             Un colombiano que representará a su país en una de las 7 maratones más importantes del mundo
           </p>
 
