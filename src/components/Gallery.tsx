@@ -27,7 +27,7 @@ const carouselData = [
   },
   {
     title: "Camiseta Legacy",
-    images: [legacy1, legacy2, legacy3, legacy4],
+    images: [legacy1, legacy2, legacy3, legacy4, legacy5, legacy6],
   },
   {
     title: "Destino: Sídney 2026",
