@@ -1,73 +1,142 @@
-# Welcome to your Lovable project
+# 👕 Tincho Camisetas
 
-## Project info
+Landing page para la venta de camisetas deportivas de alto rendimiento inspiradas en la maratón de Sidney.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+![Vite](https://img.shields.io/badge/Vite-5.x-646CFF?logo=vite&logoColor=white)
+![React](https://img.shields.io/badge/React-18.3-61DAFB?logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.x-06B6D4?logo=tailwindcss&logoColor=white)
 
-## How can I edit this code?
+## 🌐 Demo
 
-There are several ways of editing your application.
+- **Preview**: [https://id-preview--03495632-b26f-4034-87a0-b688552925b2.lovable.app](https://id-preview--03495632-b26f-4034-87a0-b688552925b2.lovable.app)
+- **Producción**: [https://sydney-dream-boost.lovable.app](https://sydney-dream-boost.lovable.app)
 
-**Use Lovable**
+## ✨ Características
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+- 🎨 **Diseño moderno** con estética deportiva premium
+- 📱 **100% Responsive** - Optimizado para móvil, tablet y desktop
+- 🖼️ **Galería interactiva** de productos
+- 📏 **Guía de medidas** con diagrama técnico de la camiseta
+- 📝 **Modal de pedidos** integrado
+- ⚡ **Rendimiento optimizado** con Vite
+- 🎭 **Animaciones suaves** con Framer Motion
 
-Changes made via Lovable will be committed automatically to this repo.
+## 📏 Medidas del Producto
 
-**Use your preferred IDE**
+| Medida | Valor |
+|--------|-------|
+| Largo buso | 72 cm |
+| Largo manga | 23 cm |
+| Contorno manga | 36 cm |
+| Ancho pecho | 44 cm |
+| Ancho espalda | 44 cm |
+| Cintura | 102 cm |
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 🚀 Inicio Rápido
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Prerrequisitos
 
-Follow these steps:
+- Node.js 18+ 
+- npm o bun
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### Instalación
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+```bash
+# Clonar repositorio
+git clone <URL_DEL_REPOSITORIO>
 
-# Step 3: Install the necessary dependencies.
-npm i
+# Entrar al directorio
+cd tincho-camisetas
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Instalar dependencias
+npm install
+
+# Iniciar servidor de desarrollo
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+La aplicación estará disponible en `http://localhost:8080`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 📁 Estructura del Proyecto
 
-**Use GitHub Codespaces**
+```
+src/
+├── assets/              # Imágenes del producto
+├── components/          # Componentes React
+│   ├── ui/             # Componentes shadcn/ui
+│   ├── Footer.tsx      # Pie de página
+│   ├── Gallery.tsx     # Galería de imágenes
+│   ├── Header.tsx      # Cabecera y navegación
+│   ├── Hero.tsx        # Sección principal
+│   ├── MeasurementsGuide.tsx  # Guía de medidas
+│   ├── OrderModal.tsx  # Modal de pedidos
+│   ├── Product.tsx     # Información del producto
+│   ├── SizeFinder.tsx  # Buscador de talla
+│   ├── SocialProof.tsx # Testimonios
+│   └── Story.tsx       # Historia del producto
+├── hooks/              # Hooks personalizados
+├── lib/                # Utilidades
+├── pages/              # Páginas
+└── test/               # Tests
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 🛠️ Scripts Disponibles
 
-## What technologies are used for this project?
+| Script | Descripción |
+|--------|-------------|
+| `npm run dev` | Servidor de desarrollo |
+| `npm run build` | Build de producción |
+| `npm run preview` | Preview del build |
+| `npm run lint` | Ejecutar ESLint |
+| `npm run test` | Ejecutar tests |
 
-This project is built with:
+## 🎨 Tecnologías
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- **React 18** - Biblioteca de UI
+- **TypeScript** - Tipado estático
+- **Vite** - Build tool ultrarrápido
+- **Tailwind CSS** - Framework de estilos
+- **shadcn/ui** - Componentes accesibles
+- **React Router** - Enrutamiento SPA
+- **Lucide React** - Iconos
+- **React Hook Form** - Formularios
+- **Zod** - Validación de esquemas
 
-## How can I deploy this project?
+## 📖 Documentación
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+- [📥 Guía de Instalación](docs/INSTALACION.md)
+- [🚀 Guía de Despliegue](docs/DESPLIEGUE.md)
 
-## Can I connect a custom domain to my Lovable project?
+## 🌐 Despliegue
 
-Yes, you can!
+### Lovable (Recomendado)
+1. Abrir proyecto en Lovable
+2. Clic en "Publish"
+3. ¡Listo!
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+### Otras opciones
+- Vercel
+- Netlify
+- GitHub Pages
+- Servidor propio
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Ver [Guía de Despliegue](docs/DESPLIEGUE.md) para instrucciones detalladas.
+
+## 🤝 Contribuir
+
+1. Fork del repositorio
+2. Crear rama de feature (`git checkout -b feature/nueva-funcionalidad`)
+3. Commit de cambios (`git commit -m 'Agregar nueva funcionalidad'`)
+4. Push a la rama (`git push origin feature/nueva-funcionalidad`)
+5. Abrir Pull Request
+
+## 📄 Licencia
+
+Este proyecto es propietario. Todos los derechos reservados.
+
+---
+
+<p align="center">
+  <strong>Tincho 2026</strong> - Hecho con ❤️
+</p>
