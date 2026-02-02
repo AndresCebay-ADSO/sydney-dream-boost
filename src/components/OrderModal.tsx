@@ -22,7 +22,10 @@ export interface OrderData {
   phone: string;
   address: string;
   city: string;
+  quantity: number;
 }
+
+const UNIT_PRICE = 120000;
 
 const orderSchema = z.object({
   name: z.string().min(3, "El nombre debe tener al menos 3 caracteres").max(100),
@@ -38,7 +41,18 @@ export const OrderModal = ({ open, onClose, onOrderComplete }: OrderModalProps) 
     phone: "",
     address: "",
     city: "",
+    quantity: 1,
   });
+
+  const totalPrice = formData.quantity * UNIT_PRICE;
+  const formattedTotalPrice = totalPrice.toLocaleString('es-CO');
+
+  const handleQuantityChange = (delta: number) => {
+    setFormData(prev => ({
+      ...prev,
+      quantity: Math.max(1, Math.min(10, prev.quantity + delta))
+    }));
+  };
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const handleInputChange = (field: keyof OrderData, value: string) => {
@@ -80,7 +94,7 @@ export const OrderModal = ({ open, onClose, onOrderComplete }: OrderModalProps) 
 
   const handleClose = () => {
     setStep("form");
-    setFormData({ name: "", phone: "", address: "", city: "" });
+    setFormData({ name: "", phone: "", address: "", city: "", quantity: 1 });
     setErrors({});
     onClose();
   };
@@ -125,8 +139,38 @@ export const OrderModal = ({ open, onClose, onOrderComplete }: OrderModalProps) 
                   <span className="font-medium text-primary">Única</span>
                 </div>
                 <div className="flex items-center justify-between mt-2">
-                  <span className="text-muted-foreground">Precio</span>
-                  <span className="font-bold text-gradient-gold">$120.000 COP</span>
+                  <span className="text-muted-foreground">Precio unitario</span>
+                  <span className="font-medium">$120.000 COP</span>
+                </div>
+                
+                {/* Quantity Selector */}
+                <div className="flex items-center justify-between mt-4 pt-3 border-t border-border">
+                  <span className="text-muted-foreground">Cantidad</span>
+                  <div className="flex items-center gap-3">
+                    <button
+                      type="button"
+                      onClick={() => handleQuantityChange(-1)}
+                      disabled={formData.quantity <= 1}
+                      className="w-8 h-8 rounded-full bg-background border border-border flex items-center justify-center text-lg font-bold hover:bg-primary/10 hover:border-primary/50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      −
+                    </button>
+                    <span className="font-bold text-lg w-6 text-center">{formData.quantity}</span>
+                    <button
+                      type="button"
+                      onClick={() => handleQuantityChange(1)}
+                      disabled={formData.quantity >= 10}
+                      className="w-8 h-8 rounded-full bg-background border border-border flex items-center justify-center text-lg font-bold hover:bg-primary/10 hover:border-primary/50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+                
+                {/* Total Price */}
+                <div className="flex items-center justify-between mt-3 pt-3 border-t border-border">
+                  <span className="text-foreground font-medium">Total</span>
+                  <span className="font-bold text-xl text-gradient-gold">${formattedTotalPrice} COP</span>
                 </div>
               </div>
 
@@ -236,12 +280,20 @@ export const OrderModal = ({ open, onClose, onOrderComplete }: OrderModalProps) 
                   <span className="font-medium text-right max-w-[200px]">{formData.address}</span>
                 </div>
                 <div className="pt-3 border-t border-border flex justify-between">
+                  <span className="text-muted-foreground">Producto</span>
+                  <span className="font-medium">Camiseta Team Tincho</span>
+                </div>
+                <div className="flex justify-between">
                   <span className="text-muted-foreground">Talla</span>
                   <span className="font-bold text-primary">Única</span>
                 </div>
                 <div className="flex justify-between">
+                  <span className="text-muted-foreground">Cantidad</span>
+                  <span className="font-bold">{formData.quantity}</span>
+                </div>
+                <div className="flex justify-between">
                   <span className="text-muted-foreground">Total a pagar</span>
-                  <span className="font-bold text-gradient-gold">$120.000 COP</span>
+                  <span className="font-bold text-xl text-gradient-gold">${formattedTotalPrice} COP</span>
                 </div>
               </div>
 
@@ -275,8 +327,8 @@ export const OrderModal = ({ open, onClose, onOrderComplete }: OrderModalProps) 
 
               <div className="p-4 rounded-lg bg-secondary border border-border text-left">
                 <p className="text-sm text-muted-foreground mb-2">Resumen del pedido:</p>
-                <p className="font-medium">Camiseta Team Tincho - Talla Única</p>
-                <p className="text-primary font-bold">$120.000 COP</p>
+                <p className="font-medium">Camiseta Team Tincho - Talla Única × {formData.quantity}</p>
+                <p className="text-primary font-bold text-lg">${formattedTotalPrice} COP</p>
                 <p className="text-xs text-muted-foreground mt-2">
                   Te contactaremos por WhatsApp para confirmar el pago y coordinar el envío.
                 </p>
