@@ -20,12 +20,13 @@ import banderaColombiaArco from "@/assets/bandera-colombia-arco.avif";
 import fondoParedBerlin from "@/assets/fondo-pared-berlin.avif";
 import martinMedallaBandera from "@/assets/martin-medalla-bandera.avif";
 import banderaChicas from "@/assets/bandera-chicas.avif";
+import medalla6 from "@/assets/medalla-6.avif";
 
 // Carousel data for each section
 const carouselData = [
   {
     title: "Berlín 2025",
-    images: [banderaColombiaArco, fondoParedBerlin, martinMedallaBandera, banderaChicas],
+    images: [banderaColombiaArco, fondoParedBerlin, martinMedallaBandera, banderaChicas, medalla6],
   },
   {
     title: "Cruzando la meta",
