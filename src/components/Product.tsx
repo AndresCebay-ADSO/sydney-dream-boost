@@ -37,6 +37,9 @@ export const Product = ({ onOrderClick }: ProductProps) => {
   const [selectedImage, setSelectedImage] = useState(0);
   const isMobile = useIsMobile();
 
+  // Ensure selectedImage is within bounds
+  const safeSelectedImage = Math.min(selectedImage, productImages.length - 1);
+
   const handleImageLoad = (index: number) => {
     setLoadedImages(prev => new Set(prev).add(index));
   };
@@ -89,13 +92,13 @@ export const Product = ({ onOrderClick }: ProductProps) => {
                   {/* Main Image */}
                   <div className="relative aspect-square rounded-2xl overflow-hidden bg-gradient-card border border-border shadow-glow">
                     <img 
-                      src={productImages[selectedImage].src}
-                      alt={productImages[selectedImage].alt}
-                      className={`w-full h-full object-cover transition-opacity duration-500 ${loadedImages.has(selectedImage) ? 'opacity-100' : 'opacity-0'}`}
-                      style={{ objectPosition: productImages[selectedImage].position }}
-                      onLoad={() => handleImageLoad(selectedImage)}
+                      src={productImages[safeSelectedImage].src}
+                      alt={productImages[safeSelectedImage].alt}
+                      className={`w-full h-full object-cover transition-opacity duration-500 ${loadedImages.has(safeSelectedImage) ? 'opacity-100' : 'opacity-0'}`}
+                      style={{ objectPosition: productImages[safeSelectedImage].position }}
+                      onLoad={() => handleImageLoad(safeSelectedImage)}
                     />
-                    {!loadedImages.has(selectedImage) && (
+                    {!loadedImages.has(safeSelectedImage) && (
                       <div className="absolute inset-0 bg-secondary animate-pulse" />
                     )}
                   </div>
