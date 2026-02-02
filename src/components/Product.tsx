@@ -13,7 +13,6 @@ import {
 import camisetaBoceto from "@/assets/camiseta-boceto.avif";
 import camisetaFrente from "@/assets/camiseta-frente.webp";
 import camisetaEspalda from "@/assets/camiseta-espalda-new.webp";
-import camiseta4 from "@/assets/camiseta-4.avif";
 
 interface ProductProps {
   onOrderClick: () => void;
@@ -29,7 +28,6 @@ const productImages = [
   { src: camisetaBoceto, alt: "Camiseta Team Tincho - Boceto del diseño", position: "center" },
   { src: camisetaFrente, alt: "Camiseta Team Tincho - Vista frontal", position: "center" },
   { src: camisetaEspalda, alt: "Camiseta Team Tincho - Vista trasera", position: "center" },
-  { src: camiseta4, alt: "Camiseta Team Tincho - Vista adicional", position: "center 30%" },
 ];
 
 export const Product = ({ onOrderClick }: ProductProps) => {
@@ -102,7 +100,7 @@ export const Product = ({ onOrderClick }: ProductProps) => {
                   </div>
                   
                   {/* Thumbnails */}
-                  <div className="grid grid-cols-4 gap-3">
+                  <div className="grid grid-cols-3 gap-3">
                     {productImages.map((image, index) => (
                       <button
                         key={index}
