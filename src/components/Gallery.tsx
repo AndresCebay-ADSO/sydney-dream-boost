@@ -42,7 +42,7 @@ const carouselData = [
     title: "Cruzando la meta",
     images: [
       { src: cruzandoMeta1, position: "center 20%" },
-      { src: cruzandoMeta2, position: "center 20%" },
+      { src: cruzandoMeta2, position: "center 45%" },
       { src: cruzandoMeta3, position: "center 20%" },
       { src: cruzandoMeta4, position: "center 20%" },
     ],
