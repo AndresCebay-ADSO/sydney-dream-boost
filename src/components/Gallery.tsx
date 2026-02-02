@@ -26,25 +26,52 @@ import medalla6 from "@/assets/medalla-6.avif";
 const carouselData = [
   {
     title: "Berlín 2025",
-    images: [banderaColombiaArco, fondoParedBerlin, martinMedallaBandera, banderaChicas, medalla6],
+    images: [
+      { src: banderaColombiaArco, position: "center 20%" },
+      { src: fondoParedBerlin, position: "center 20%" },
+      { src: martinMedallaBandera, position: "center 40%" },
+      { src: banderaChicas, position: "center 20%" },
+      { src: medalla6, position: "center 20%" },
+    ],
   },
   {
     title: "Cruzando la meta",
-    images: [sidneyMeta, sidney3],
+    images: [
+      { src: sidneyMeta, position: "center 20%" },
+      { src: sidney3, position: "center 20%" },
+    ],
   },
   {
     title: "Camiseta Legacy",
-    images: [legacy1, legacy2, legacy3, legacy4, legacy5, legacy6, legacy7, legacy8],
+    images: [
+      { src: legacy1, position: "center 20%" },
+      { src: legacy2, position: "center 20%" },
+      { src: legacy3, position: "center 20%" },
+      { src: legacy4, position: "center 20%" },
+      { src: legacy5, position: "center 20%" },
+      { src: legacy6, position: "center 20%" },
+      { src: legacy7, position: "center 20%" },
+      { src: legacy8, position: "center 20%" },
+    ],
   },
   {
     title: "Destino: Sídney 2026",
-    images: [sidneyOpera, sidney3, heroImage],
+    images: [
+      { src: sidneyOpera, position: "center 20%" },
+      { src: sidney3, position: "center 20%" },
+      { src: heroImage, position: "center 20%" },
+    ],
   },
 ];
 
+interface GalleryImage {
+  src: string;
+  position: string;
+}
+
 interface GalleryCarouselProps {
   title: string;
-  images: string[];
+  images: GalleryImage[];
 }
 
 const GalleryCarousel = ({ title, images }: GalleryCarouselProps) => {
@@ -92,9 +119,10 @@ const GalleryCarousel = ({ title, images }: GalleryCarouselProps) => {
               className="flex-[0_0_100%] min-w-0 h-full"
             >
               <img
-                src={image}
+                src={image.src}
                 alt={`${title} - ${index + 1}`}
-                className="w-full h-full object-cover object-[center_20%] transition-transform duration-700"
+                className="w-full h-full object-cover transition-transform duration-700"
+                style={{ objectPosition: image.position }}
                 loading="lazy"
               />
             </div>
