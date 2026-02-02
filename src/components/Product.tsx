@@ -51,8 +51,9 @@ export const Product = ({ onOrderClick }: ProductProps) => {
         <div className="max-w-6xl mx-auto">
           {/* Section header */}
           <div className="text-center mb-10 sm:mb-16">
-            <h2 className="font-display text-2xl sm:text-4xl md:text-5xl font-bold px-2">
-              <span className="text-gradient-gold">Road to Berlín</span>
+            <span className="text-primary font-medium text-xs sm:text-sm uppercase tracking-[0.25em]">PRODUCTO</span>
+            <h2 className="font-display text-2xl sm:text-4xl md:text-5xl font-bold mt-3 sm:mt-4 px-2">
+              <span className="text-gradient-gold">Edición limitada 2025</span>
             </h2>
           </div>
 
@@ -147,7 +148,7 @@ export const Product = ({ onOrderClick }: ProductProps) => {
             {/* Product Details */}
             <div className="space-y-6 sm:space-y-8 mt-8 lg:mt-0">
               <div>
-                <h3 className="font-display text-xl sm:text-2xl font-bold mb-2">Road to Berlín</h3>
+                <h3 className="font-display text-xl sm:text-2xl font-bold mb-2">Road to Berlin 2025</h3>
                 <p className="text-sm sm:text-base text-muted-foreground">
                   Camiseta deportiva de alta calidad con diseño exclusivo que representa 
                   el viaje de Martín hacia la Maratón de Sídney 2026.
