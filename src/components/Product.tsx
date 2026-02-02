@@ -62,15 +62,33 @@ export const Product = ({ onOrderClick }: ProductProps) => {
                 /* Mobile Carousel */
                 <Carousel className="w-full">
                   <CarouselContent>
-                {productImages.map((image, index) => (
+                    {productImages.map((image, index) => (
                       <CarouselItem key={index}>
-                        <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-charcoal border border-border shadow-glow">
-                          <div className="absolute inset-0 bg-gradient-to-b from-charcoal-light via-charcoal to-charcoal" />
+                        <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border border-border shadow-glow"
+                          style={{ backgroundColor: 'hsl(0 0% 7%)' }}
+                        >
+                          {/* Radial vignette for seamless edge blending */}
+                          <div 
+                            className="absolute inset-0 pointer-events-none z-10"
+                            style={{
+                              background: 'radial-gradient(ellipse 85% 90% at center, transparent 60%, hsl(0 0% 7% / 0.4) 80%, hsl(0 0% 7% / 0.9) 100%)',
+                            }}
+                          />
+                          {/* Soft edge shadows for natural blending */}
+                          <div 
+                            className="absolute inset-0 pointer-events-none z-10"
+                            style={{
+                              boxShadow: 'inset 0 0 60px 20px hsl(0 0% 7% / 0.5)',
+                            }}
+                          />
                           <img 
                             src={image.src}
                             alt={image.alt}
-                            className={`relative w-full h-full object-contain p-2 transition-opacity duration-500 ${loadedImages.has(index) ? 'opacity-100' : 'opacity-0'}`}
-                            style={{ objectPosition: image.position }}
+                            className={`relative w-full h-full object-contain transition-opacity duration-500 ${loadedImages.has(index) ? 'opacity-100' : 'opacity-0'}`}
+                            style={{ 
+                              objectPosition: image.position,
+                              padding: '8px',
+                            }}
                             onLoad={() => handleImageLoad(index)}
                           />
                           {!loadedImages.has(index) && (
