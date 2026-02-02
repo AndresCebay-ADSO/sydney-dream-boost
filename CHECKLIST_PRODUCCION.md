@@ -5,7 +5,7 @@
 ### 1. Variables de Entorno en Vercel
 - [ ] Ir a tu proyecto en Vercel
 - [ ] Settings → Environment Variables
-- [ ] Agregar: `VITE_WHATSAPP_NUMBER=573116317047`
+- [ ] Agregar: `VITE_WHATSAPP_NUMBER=573112866538`
 - [ ] (Opcional) Agregar: `VITE_SITE_URL=https://tu-dominio.com`
 
 ### 2. Verificar que .env NO esté en Git

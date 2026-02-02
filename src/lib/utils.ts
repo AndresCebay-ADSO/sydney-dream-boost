@@ -8,7 +8,7 @@ export function cn(...inputs: ClassValue[]) {
 
 // Configuración de WhatsApp para pedidos
 // Puede ser sobrescrito por variable de entorno
-export const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER || "573116317047";
+export const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER || "573112866538";
 
 export interface OrderData {
   name: string;

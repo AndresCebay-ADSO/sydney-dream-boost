@@ -159,7 +159,7 @@ export const OrderModal = ({ open, onClose, onOrderComplete }: OrderModalProps) 
       logger.error('Error al enviar pedido:', error);
       toast({
         title: "Error al abrir WhatsApp",
-        description: "Por favor, intenta nuevamente o contacta directamente al número: +57 311 631 7047",
+        description: "Por favor, intenta nuevamente o contacta directamente al número: +57 311 286 6538",
         variant: "destructive",
       });
     } finally {

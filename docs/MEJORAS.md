@@ -49,7 +49,7 @@ Crea un archivo `.env` en la raíz del proyecto con:
 
 ```env
 # Número de WhatsApp (formato: código país + número sin espacios)
-VITE_WHATSAPP_NUMBER=573116317047
+VITE_WHATSAPP_NUMBER=573112866538
 
 # URL del sitio (para SEO)
 VITE_SITE_URL=https://sydney-dream-boost.lovable.app
