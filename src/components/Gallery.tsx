@@ -16,12 +16,16 @@ import legacy5 from "@/assets/legacy-5.avif";
 import legacy6 from "@/assets/legacy-6.avif";
 import legacy7 from "@/assets/legacy-7.avif";
 import legacy8 from "@/assets/legacy-8.avif";
+import banderaColombiaArco from "@/assets/bandera-colombia-arco.avif";
+import fondoParedBerlin from "@/assets/fondo-pared-berlin.avif";
+import martinMedallaBandera from "@/assets/martin-medalla-bandera.avif";
+import banderaChicas from "@/assets/bandera-chicas.avif";
 
 // Carousel data for each section
 const carouselData = [
   {
     title: "Berlín 2025",
-    images: [heroImage, sidneyMeta],
+    images: [banderaColombiaArco, fondoParedBerlin, martinMedallaBandera, banderaChicas],
   },
   {
     title: "Cruzando la meta",
