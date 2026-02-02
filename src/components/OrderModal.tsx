@@ -101,7 +101,7 @@ export const OrderModal = ({ open, onClose, onOrderComplete }: OrderModalProps) 
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-md bg-card border-border">
+      <DialogContent className="w-[calc(100%-2rem)] max-w-[90vw] sm:max-w-md md:max-w-lg lg:max-w-xl bg-card border-border max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="font-display text-xl flex items-center gap-2">
             {step === "form" && (
