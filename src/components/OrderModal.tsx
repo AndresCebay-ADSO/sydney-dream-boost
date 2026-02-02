@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Check, Package, MapPin, Phone, User, AlertCircle } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Check, Package, MapPin, Phone, User, AlertCircle, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -10,6 +10,9 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { z } from "zod";
+import { sendOrderToWhatsApp } from "@/lib/utils";
+import { useToast } from "@/hooks/use-toast";
+import { logger } from "@/lib/logger";
 
 interface OrderModalProps {
   open: boolean;
@@ -27,25 +30,72 @@ export interface OrderData {
 
 const UNIT_PRICE = 120000;
 
+// Función para limpiar y validar teléfono colombiano
+const cleanPhone = (phone: string): string => {
+  return phone.replace(/\s+/g, '').replace(/[^\d+]/g, '');
+};
+
 const orderSchema = z.object({
-  name: z.string().min(3, "El nombre debe tener al menos 3 caracteres").max(100),
-  phone: z.string().min(10, "Ingresa un número de teléfono válido").max(15),
-  address: z.string().min(10, "Ingresa una dirección completa").max(200),
-  city: z.string().min(3, "Ingresa una ciudad válida").max(50),
+  name: z.string()
+    .min(3, "El nombre debe tener al menos 3 caracteres")
+    .max(100)
+    .regex(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/, "El nombre solo puede contener letras y espacios"),
+  phone: z.string()
+    .min(10, "Ingresa un número de teléfono válido")
+    .max(15)
+    .refine((val) => {
+      const cleaned = cleanPhone(val);
+      // Acepta formato colombiano: +57, 57, o sin prefijo (10 dígitos)
+      return /^(\+?57)?[1-9]\d{9}$/.test(cleaned) || /^[1-9]\d{9}$/.test(cleaned);
+    }, "Ingresa un número de teléfono colombiano válido (ej: 300 123 4567)"),
+  address: z.string()
+    .min(10, "Ingresa una dirección completa")
+    .max(200),
+  city: z.string()
+    .min(3, "Ingresa una ciudad válida")
+    .max(50)
+    .regex(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/, "La ciudad solo puede contener letras y espacios"),
 });
 
+const STORAGE_KEY = 'tincho_order_form_data';
+
 export const OrderModal = ({ open, onClose, onOrderComplete }: OrderModalProps) => {
+  const { toast } = useToast();
   const [step, setStep] = useState<"form" | "confirm" | "success">("form");
-  const [formData, setFormData] = useState<OrderData>({
-    name: "",
-    phone: "",
-    address: "",
-    city: "",
-    quantity: 1,
+  const [isLoading, setIsLoading] = useState(false);
+  const [formData, setFormData] = useState<OrderData>(() => {
+    // Cargar datos guardados del localStorage si existen
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        return { ...parsed, quantity: parsed.quantity || 1 };
+      }
+    } catch (error) {
+      // Si hay error al parsear, usar valores por defecto
+    }
+    return {
+      name: "",
+      phone: "",
+      address: "",
+      city: "",
+      quantity: 1,
+    };
   });
 
   const totalPrice = formData.quantity * UNIT_PRICE;
   const formattedTotalPrice = totalPrice.toLocaleString('es-CO');
+
+  // Guardar datos en localStorage cuando cambian
+  useEffect(() => {
+    if (formData.name || formData.phone || formData.address || formData.city) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
+      } catch (error) {
+        // Si hay error (ej: modo incógnito), continuar sin guardar
+      }
+    }
+  }, [formData]);
 
   const handleQuantityChange = (delta: number) => {
     setFormData(prev => ({
@@ -56,6 +106,12 @@ export const OrderModal = ({ open, onClose, onOrderComplete }: OrderModalProps) 
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const handleInputChange = (field: keyof OrderData, value: string) => {
+    // Limpiar teléfono automáticamente
+    if (field === "phone") {
+      // Permitir solo números, espacios y el signo +
+      value = value.replace(/[^\d+\s]/g, '');
+    }
+    
     setFormData(prev => ({ ...prev, [field]: value }));
     if (errors[field]) {
       setErrors(prev => ({ ...prev, [field]: "" }));
@@ -87,20 +143,47 @@ export const OrderModal = ({ open, onClose, onOrderComplete }: OrderModalProps) 
     }
   };
 
-  const handleConfirm = () => {
-    onOrderComplete();
-    setStep("success");
+  const handleConfirm = async () => {
+    setIsLoading(true);
+    try {
+      await sendOrderToWhatsApp(formData);
+      // Limpiar datos guardados después de enviar exitosamente
+      localStorage.removeItem(STORAGE_KEY);
+      onOrderComplete();
+      setStep("success");
+      toast({
+        title: "¡Pedido enviado!",
+        description: "WhatsApp se abrió con los detalles de tu pedido.",
+      });
+    } catch (error) {
+      logger.error('Error al enviar pedido:', error);
+      toast({
+        title: "Error al abrir WhatsApp",
+        description: "Por favor, intenta nuevamente o contacta directamente al número: +57 311 631 7047",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleClose = () => {
     setStep("form");
-    setFormData({ name: "", phone: "", address: "", city: "", quantity: 1 });
+    // No limpiar datos automáticamente, mantenerlos para próxima vez
     setErrors({});
+    setIsLoading(false);
     onClose();
   };
 
+  // Limpiar datos cuando el modal se cierra completamente
+  const handleOpenChange = (isOpen: boolean) => {
+    if (!isOpen) {
+      handleClose();
+    }
+  };
+
   return (
-    <Dialog open={open} onOpenChange={handleClose}>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent className="w-[calc(100%-2rem)] max-w-[90vw] sm:max-w-md md:max-w-lg lg:max-w-xl bg-card border-border max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="font-display text-xl flex items-center gap-2">
@@ -113,7 +196,7 @@ export const OrderModal = ({ open, onClose, onOrderComplete }: OrderModalProps) 
             {step === "confirm" && (
               <>
                 <AlertCircle className="w-5 h-5 text-primary" />
-                Confirmar pedido
+                Confirmar y enviar pedido
               </>
             )}
             {step === "success" && (
@@ -239,7 +322,7 @@ export const OrderModal = ({ open, onClose, onOrderComplete }: OrderModalProps) 
 
               <div className="p-4 rounded-lg bg-primary/10 border border-primary/30 space-y-2">
                 <p className="text-sm text-muted-foreground">
-                  <strong className="text-foreground">Flujo de compra:</strong> Pedido → Coordinación → Confirmación de pago → Envío
+                  <strong className="text-foreground">Flujo de compra:</strong> Pedido por WhatsApp → Confirmación de pago → Envío
                 </p>
                 <p className="text-xs text-muted-foreground">
                   <strong className="text-foreground">Envío GRATIS</strong> en La Plata, Huila. Otras ciudades: costo a cargo del cliente.
@@ -259,7 +342,7 @@ export const OrderModal = ({ open, onClose, onOrderComplete }: OrderModalProps) 
           {step === "confirm" && (
             <div className="space-y-6">
               <p className="text-muted-foreground">
-                Por favor verifica que tus datos sean correctos antes de confirmar el pedido.
+                Revisa tus datos. Al confirmar, se abrirá WhatsApp automáticamente con el mensaje de pedido.
               </p>
 
               <div className="space-y-3 p-4 rounded-lg bg-secondary border border-border">
@@ -303,9 +386,17 @@ export const OrderModal = ({ open, onClose, onOrderComplete }: OrderModalProps) 
                 </Button>
                 <Button 
                   onClick={handleConfirm}
+                  disabled={isLoading}
                   className="flex-1 bg-primary text-primary-foreground hover:bg-gold-light font-display font-semibold"
                 >
-                  Confirmar pedido
+                  {isLoading ? (
+                    <>
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      Enviando...
+                    </>
+                  ) : (
+                    "Enviar por WhatsApp"
+                  )}
                 </Button>
               </div>
             </div>
@@ -319,9 +410,9 @@ export const OrderModal = ({ open, onClose, onOrderComplete }: OrderModalProps) 
               </div>
               
               <div>
-                <h3 className="font-display text-2xl font-bold mb-2">¡Gracias por tu apoyo!</h3>
+                <h3 className="font-display text-2xl font-bold mb-2">¡Pedido enviado!</h3>
                 <p className="text-muted-foreground">
-                  Tu pedido ha sido registrado exitosamente. Te contactaremos pronto por WhatsApp para coordinar la entrega.
+                  Tu pedido ha sido enviado por WhatsApp. Te contactaremos pronto para confirmar el pago y coordinar la entrega.
                 </p>
               </div>
 
@@ -330,7 +421,7 @@ export const OrderModal = ({ open, onClose, onOrderComplete }: OrderModalProps) 
                 <p className="font-medium">Camiseta Team Tincho - Talla Única × {formData.quantity}</p>
                 <p className="text-primary font-bold text-lg">${formattedTotalPrice} COP</p>
                 <p className="text-xs text-muted-foreground mt-2">
-                  Te contactaremos por WhatsApp para confirmar el pago y coordinar el envío.
+                  WhatsApp se abrió automáticamente con los detalles de tu pedido.
                 </p>
               </div>
 

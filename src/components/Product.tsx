@@ -86,6 +86,7 @@ export const Product = ({ onOrderClick }: ProductProps) => {
                           <img 
                             src={image.src}
                             alt={image.alt}
+                            loading="lazy"
                             className={`relative w-full h-full object-contain transition-opacity duration-500 ${loadedImages.has(index) ? 'opacity-100' : 'opacity-0'}`}
                             style={{ 
                               objectPosition: image.position,
@@ -111,6 +112,7 @@ export const Product = ({ onOrderClick }: ProductProps) => {
                     <img 
                       src={productImages[selectedImage].src}
                       alt={productImages[selectedImage].alt}
+                      loading={selectedImage === 0 ? "eager" : "lazy"}
                       className={`w-full h-full object-cover transition-opacity duration-500 ${loadedImages.has(selectedImage) ? 'opacity-100' : 'opacity-0'}`}
                       style={{ objectPosition: productImages[selectedImage].position }}
                       onLoad={() => handleImageLoad(selectedImage)}
@@ -135,6 +137,7 @@ export const Product = ({ onOrderClick }: ProductProps) => {
                         <img 
                           src={image.src}
                           alt={image.alt}
+                          loading="lazy"
                           className="w-full h-full object-cover"
                         />
                       </button>

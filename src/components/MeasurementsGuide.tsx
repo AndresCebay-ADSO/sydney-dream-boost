@@ -23,6 +23,7 @@ export const MeasurementsGuide = () => {
         <img 
           src={camisetaMedidas} 
           alt="Diagrama de medidas de la camiseta" 
+          loading="lazy"
           className="w-full h-auto"
         />
         
