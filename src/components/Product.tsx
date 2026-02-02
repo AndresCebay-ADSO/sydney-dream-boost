@@ -10,10 +10,10 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import camisetaImage from "@/assets/camiseta-berlin.png";
-import camisaPecho from "@/assets/camisa-pecho.png";
-import camisaEspalda from "@/assets/camisa-espalda.png";
-import camisaDetalle from "@/assets/camisa-detalle.jpg";
+import camisetaBoceto from "@/assets/camiseta-boceto.avif";
+import camisetaFrente from "@/assets/camiseta-frente.webp";
+import camisetaEspalda from "@/assets/camiseta-espalda-new.webp";
+import camiseta4 from "@/assets/camiseta-4.avif";
 
 interface ProductProps {
   onOrderClick: () => void;
@@ -26,10 +26,10 @@ const features = [
 ];
 
 const productImages = [
-  { src: camisetaImage, alt: "Camiseta Team Tincho - Vista principal" },
-  { src: camisaPecho, alt: "Camiseta Team Tincho - Vista frontal" },
-  { src: camisaEspalda, alt: "Camiseta Team Tincho - Vista trasera" },
-  { src: camisaDetalle, alt: "Camiseta Team Tincho - Detalle del diseño" },
+  { src: camisetaBoceto, alt: "Camiseta Team Tincho - Boceto del diseño" },
+  { src: camisetaFrente, alt: "Camiseta Team Tincho - Vista frontal" },
+  { src: camisetaEspalda, alt: "Camiseta Team Tincho - Vista trasera" },
+  { src: camiseta4, alt: "Camiseta Team Tincho - Vista adicional" },
 ];
 
 export const Product = ({ onOrderClick }: ProductProps) => {
