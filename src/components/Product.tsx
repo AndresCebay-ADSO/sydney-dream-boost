@@ -29,7 +29,6 @@ const productImages = [
   { src: camisetaBoceto, alt: "Camiseta Team Tincho - Boceto del diseño", position: "center" },
   { src: camisetaFrente, alt: "Camiseta Team Tincho - Vista frontal", position: "center" },
   { src: camisetaEspalda, alt: "Camiseta Team Tincho - Vista trasera", position: "center" },
-  { src: camiseta4, alt: "Camiseta Team Tincho - Vista adicional", position: "center 30%" },
 ];
 
 export const Product = ({ onOrderClick }: ProductProps) => {
