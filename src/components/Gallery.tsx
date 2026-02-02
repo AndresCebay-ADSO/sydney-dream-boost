@@ -5,9 +5,9 @@ import { cn } from "@/lib/utils";
 
 // Images imports
 import heroImage from "@/assets/hero.webp";
-import sidneyMeta from "@/assets/sidney-1.jpg";
-import sidneyOpera from "@/assets/sidney-2.avif";
-import sidney3 from "@/assets/sidney-3.jpg";
+import sidney1 from "@/assets/sidney-1-2.jpg";
+import sidney2 from "@/assets/sidney-2-2.avif";
+import sidney3 from "@/assets/sidney-3-2.jpg";
 import cruzandoMeta1 from "@/assets/cruzando-meta-1.avif";
 import cruzandoMeta2 from "@/assets/cruzando-meta-2.avif";
 import cruzandoMeta3 from "@/assets/cruzando-meta-3.webp";
@@ -63,9 +63,9 @@ const carouselData = [
   {
     title: "Destino: Sídney 2026",
     images: [
-      { src: sidneyOpera, position: "center 20%" },
-      { src: sidney3, position: "center 20%" },
-      { src: heroImage, position: "center 20%" },
+      { src: sidney1, position: "center 20%" },
+      { src: sidney2, position: "center 20%" },
+      { src: sidney3, position: "center 40%" },
     ],
   },
 ];
